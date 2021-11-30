@@ -19,6 +19,7 @@ function generateMenu($items) {
         }
         
     }
+    echo $_SERVER['REQUEST_URI']
     $html .= "</div>\n";
     return $html;
 }
