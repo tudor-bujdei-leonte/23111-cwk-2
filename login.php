@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["name"] = $name;
                             $_SESSION["is_staff"] = $is_staff;
 
-                            $Message = "Successfully logged in!";
+                            $Message = "Successfully logged in!" . $_SESSION["name"];
                             header("location: index.php?Message=" . urlencode($Message));
                         } else {
                             echo '<script>alert("Invalid login credentials.");</script>';
