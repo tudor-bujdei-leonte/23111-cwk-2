@@ -76,7 +76,7 @@ session_start();
 
         echo GenerateMenu($menu);
 
-        if (isset($_SESSION["name"])) {
+        if (isset($_SESSION["name"]) && isset($_SESSION["is_logged"])) {
             echo "<p>Welcome back, {$_SESSION['name']}<b></b></p>";
             echo $_SESSION["is_logged"];
         }

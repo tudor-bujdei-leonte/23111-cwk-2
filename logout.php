@@ -61,11 +61,11 @@ function generateMenu($items) {
 
 session_start();
 if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)) {
-    header("location: welcome.php?Message=" . urlencode("You are not logged in."));
+    header("location: index.php?Message=" . urlencode("You are not logged in."));
     exit;
 } else {
     session_destroy();
-    header("location: welcome.php?Message=" . urlencode("Successfully logged out!"));
+    header("location: index.php?Message=" . urlencode("Successfully logged out!"));
     exit;
 }
 
