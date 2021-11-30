@@ -81,13 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
         if (!empty($uid_err)) {
-            echo '<script>alert(\"' . $uid_err . '\");</script>';
+            echo '<script>alert("' . $uid_err . '");</script>';
         }
         if (!empty($name_err)) {
-            echo '<script>alert(\"' . $name_err . '\");</script>';
+            echo '<script>alert("' . $name_err . '");</script>';
         }
         if (!empty($password_err)) {
-            echo '<script>alert(\"' . $password_err . '\");</script>';
+            echo '<script>alert("' . $password_err . '");</script>';
         }
         if (!empty($confirm_password_err)) {
             echo '<script>alert("' . $confirm_password_err . '");</script>';
