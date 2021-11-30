@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) < 1) {
-                    echo '<script>alert("Invalid login credentials.");</script>'
+                    echo '<script>alert("Invalid login credentials.");</script>';
                 } else {
                     $Message = "Successfully logged in!";
                     header("location: index.php?Message=" . urlencode($Message));
