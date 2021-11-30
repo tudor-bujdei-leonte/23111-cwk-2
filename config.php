@@ -16,4 +16,6 @@ $link = mysqli_connect($database_host, $database_user, $database_pass, 'n98211tb
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
+
+echo $link;
 ?>
