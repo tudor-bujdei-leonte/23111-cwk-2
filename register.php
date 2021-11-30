@@ -35,9 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty(trim($_POST["name"]))) {
-        $uid_err = "Please enter your name.";
+        $name_err = "Please enter your name.";
     } elseif (!preg_match('/^[a-zA-Z \-]+$/', trim($_POST["name"]))) {
-        $name_err = "Name can only contain letters, spaces, or \"-\".";
+        $name_err = "Name can only contain letters, spaces, or -";
     } else {
         $name = trim($_POST["name"]);
     }
