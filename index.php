@@ -73,8 +73,13 @@ function generateMenu($items) {
         }
 
         echo GenerateMenu($menu);
+
+        if (isset($_SESSION["name"])) {
+            echo "<p>Welcome back, {$_SESSION['name']}<b></b></p>";
+            echo $_SESSION["is_logged"]
+        }
         ?>
 
-        <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+        <!-- <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> -->
     </body>
 </html>
