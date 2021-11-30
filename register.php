@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<script>alert(\"' . $password_err . '\");</script>';
         }
         if (!empty($confirm_password_err)) {
-            echo '<script>alert(\"' . $confirm_password_err . '\");</script>';
+            echo '<script>alert("' . $confirm_password_err . '");</script>';
         }
         
         // echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
