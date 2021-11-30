@@ -80,7 +80,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
     } else {
-        echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
+        if (!empty($uid_err)) {
+            echo '<script>alert(\"' . $uid_err . '\");</script>';
+        }
+        if (!empty($name_err)) {
+            echo '<script>alert(\"' . $name_err . '\");</script>';
+        }
+        if (!empty($password_err)) {
+            echo '<script>alert(\"' . $password_err . '\");</script>';
+        }
+        if (!empty($confirm_password_err)) {
+            echo '<script>alert(\"' . $confirm_password_err . '\");</script>';
+        }
+        
+        // echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
     }
 
     // echo $link->error . '\n' . $stmt->error;
