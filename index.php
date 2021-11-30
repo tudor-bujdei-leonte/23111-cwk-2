@@ -12,7 +12,7 @@ $menu = array(
 function generateMenu($items) {
     $html = "<div class=\"topnav\">\n";
     foreach($items as $item) {
-        $html .= "<a class=" . (($_SERVER['REQUEST_URI'] == $item['url']) ? "active": "") . " href='{$item['url']}'>{$item['text']}</a>\n";
+        $html .= "<a class=" . (($_SERVER['REQUEST_URL'] == $item['url']) ? "active": "") . " href='{$item['url']}'>{$item['text']}</a>\n";
     }
     $html .= "</div>\n";
     return $html;
