@@ -9,10 +9,22 @@ $menu = array(
     'logout' => array('text'=>'Log out', 'url'=>'logout.php'),
 );
 
+function isSuffix($s1, $s2)
+{
+    $n1 = ($s1);
+    $n2 = strlen($s2);
+    if ($n1 > $n2)
+    return false;
+    for ($i = 0; $i < $n1; $i++)
+    if ($s1[$n1 - $i - 1] != $s2[$n2 - $i - 1])
+        return false;
+    return true;
+}
+
 function generateMenu($items) {
     $html = "<div class=\"topnav\">\n";
     foreach($items as $item) {
-        if ($_SERVER['REQUEST_URI'] == $item['url']) {
+        if (isSuffix($item['url'], $_SERVER['REQUEST_URI'])) {
             $html .= "<a class=active href='{$item['url']}'>{$item['text']}</a>\n";
         } else {
             $html .= "<a href='{$item['url']}'>{$item['text']}</a>\n";
