@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $confirm_password_err = "The passwords must match.";
     }
 
-    if ($_POST["is_staff"]) { // ?
+    if (isset($_POST["is_staff"])) { // ?
         $is_staff = 1;
     }
 
