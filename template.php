@@ -9,6 +9,30 @@ $menu = array(
     'logout' => array('text'=>'Log out', 'url'=>'logout.php'),
 );
 
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    if ($_SESSION["is_staff"] === true) {
+        $menu = array(
+            'home' => array('text'=>'Home', 'url'=>'index.php'),
+            'take_quiz' => array('text'=>'Take quiz', 'url'=>'index.php'),
+            'create_quiz' => array('text'=>'Create quiz', 'url'=>'index.php'),
+            'modify_quiz' => array('text'=>'Modify quiz', 'url'=>'index.php'),
+            'logout' => array('text'=>'Log out', 'url'=>'logout.php'),
+        );
+    } else {
+        $menu = array(
+            'home' => array('text'=>'Home', 'url'=>'index.php'),
+            'take_quiz' => array('text'=>'Take quiz', 'url'=>'index.php'),
+            'logout' => array('text'=>'Log out', 'url'=>'logout.php'),
+        );
+    }
+} else {
+    $menu = array(
+        'home' => array('text'=>'Home', 'url'=>'index.php'),
+        'login' => array('text'=>'Login', 'url'=>'login.php'),
+        'register' => array('text'=>'Register', 'url'=>'register.php'),
+    );
+}
+
 function isSuffix($s1, $s2)
 {
     $n1 = ($s1);
