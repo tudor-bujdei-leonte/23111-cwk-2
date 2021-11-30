@@ -12,7 +12,7 @@ $menu = array(
 );
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    if ($_SESSION["is_staff"] === 1) {
+    if ($_SESSION["is_staff"] === true) {
         $menu = array(
             'home' => array('text'=>'Home', 'url'=>'index.php'),
             'take_quiz' => array('text'=>'Take quiz', 'url'=>'index.php'),
