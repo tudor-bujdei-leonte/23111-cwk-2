@@ -24,14 +24,13 @@ function isSuffix($s1, $s2)
 function generateMenu($items) {
     $html = "<div class=\"topnav\">\n";
     foreach($items as $item) {
-        if (isSuffix($item['url'], $_SERVER['REQUEST_URI'])) {
+        if (strpos($_SERVER['REQUEST_URI'], $item['url']) !== false) {
             $html .= "<a class=active href='{$item['url']}'>{$item['text']}</a>\n";
         } else {
             $html .= "<a href='{$item['url']}'>{$item['text']}</a>\n";
         }
         
     }
-    echo isSuffix('index.php', $_SERVER['REQUEST_URI']);
     $html .= "</div>\n";
     return $html;
 }
