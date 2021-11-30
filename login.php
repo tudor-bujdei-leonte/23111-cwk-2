@@ -3,17 +3,33 @@ $menu = array(
     'home' => array('text'=>'Home', 'url'=>'index.php'),
     'login' => array('text'=>'Login', 'url'=>'login.php'),
     'register' => array('text'=>'Register', 'url'=>'register.php'),
+    'take_quiz' => array('text'=>'Take quiz', 'url'=>'index.php'),
+    'create_quiz' => array('text'=>'Create quiz', 'url'=>'index.php'),
+    'modify_quiz' => array('text'=>'Modify quiz', 'url'=>'index.php'),
+    'logout' => array('text'=>'Log out', 'url'=>'logout.php'),
 );
 
-function generateMenu($items, $active) {
+function isSuffix($s1, $s2)
+{
+    $n1 = ($s1);
+    $n2 = strlen($s2);
+    if ($n1 > $n2)
+    return false;
+    for ($i = 0; $i < $n1; $i++)
+    if ($s1[$n1 - $i - 1] != $s2[$n2 - $i - 1])
+        return false;
+    return true;
+}
+
+function generateMenu($items) {
     $html = "<div class=\"topnav\">\n";
     foreach($items as $item) {
-        if (strcmp($item['text'], $active) == 0) {
-            $html .= "<a class=\"active\" href='{$item['url']}'>{$item['text']}</a>\n";
-        }
-        else {
+        if (strpos($_SERVER['REQUEST_URI'], $item['url']) !== false) {
+            $html .= "<a class=active href='{$item['url']}'>{$item['text']}</a>\n";
+        } else {
             $html .= "<a href='{$item['url']}'>{$item['text']}</a>\n";
         }
+        
     }
     $html .= "</div>\n";
     return $html;
@@ -91,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<script>alert("' . $_GET['Message'] . '");</script>';
         }
 
-        echo GenerateMenu($menu, "Login");
+        echo GenerateMenu($menu);
         ?>
 
         <form action="login.php" method="post">
