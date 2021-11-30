@@ -58,6 +58,8 @@ function generateMenu($items) {
     $html .= "</div>\n";
     return $html;
 }
+
+session_start();
 ?>
 
 <!doctype html>
