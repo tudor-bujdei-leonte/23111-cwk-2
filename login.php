@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($uid_err) && empty($password_err)) {
-        $sql = "SELECT uid FROM users WHERE uid == ? AND password == ?";
+        $sql = "SELECT uid FROM users WHERE uid = ? AND password = ?";
         
         if($stmt = mysqli_prepare($link, $sql)) {
             mysqli_stmt_bind_param($stmt, "ss", $param_uid, $param_psw);
