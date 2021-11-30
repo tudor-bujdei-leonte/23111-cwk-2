@@ -76,7 +76,7 @@ function generateMenu($items) {
 
         if (isset($_SESSION["name"])) {
             echo "<p>Welcome back, {$_SESSION['name']}<b></b></p>";
-            echo $_SESSION["is_logged"]
+            echo $_SESSION["is_logged"];
         }
         ?>
 
