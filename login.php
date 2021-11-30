@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // echo $link->error . '\n' . $stmt->error;
 
-    mysqli_close($link);
+    // mysqli_close($link);
 }
 ?>
 

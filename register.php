@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (mysqli_stmt_execute($stmt)) {
                 header("location: login.php");
-                echo "Successfully created account.";
+                echo '<script>alert("' . "Successfully created account." . '");</script>';
             } else {
                 echo "Something went wrong. Please try again later.";
             }
@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // echo $link->error . '\n' . $stmt->error;
 
-    mysqli_close($link);
+    // mysqli_close($link);
 }
 ?>
 
@@ -135,11 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <b>Are you a staff member?</b>
               </label>
               
-              <button type="submit">Login</button>
-            </div>
-          
-            <div class="container" style="background-color:#f1f1f1">
-              <button type="button" class="cancelbtn">Cancel</button>
+              <button type="submit">Register</button>
             </div>
           </form>
     </body>
