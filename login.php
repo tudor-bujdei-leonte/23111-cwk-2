@@ -61,7 +61,7 @@ function generateMenu($items) {
 
 session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.php?Message=" . urlencode("Already logged in."));
+    header("location: index.php?Message=" . urlencode("Already logged in." . $_SESSION["uid"]));
     exit;
 }
 
