@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <input type="password" placeholder="Confirm password" name="psw_conf" required>
 
               <label>
-                  <input type="checkbox" checked="unchecked" name="is_staff">
+                  <input type="checkbox" name="is_staff">
                   <b>Are you a staff member?</b>
               </label>
               
