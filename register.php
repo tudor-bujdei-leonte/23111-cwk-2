@@ -140,7 +140,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
             <div class="container" style="background-color:#f1f1f1">
               <button type="button" class="cancelbtn">Cancel</button>
-              <span class="psw"><a href="recover_password.html">Forgot password?</a></span>
             </div>
           </form>
     </body>
