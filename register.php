@@ -72,7 +72,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             mysqli_stmt_close($stmt);
+        } else {
+            echo "Could not prepare statement. Try again later.";
         }
+
     } else {
         echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
     }
