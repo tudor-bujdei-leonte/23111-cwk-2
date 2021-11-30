@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $menu = array(
     'home' => array('text'=>'Home', 'url'=>'index.php'),
     'login' => array('text'=>'Login', 'url'=>'login.php'),
@@ -58,8 +60,6 @@ function generateMenu($items) {
     $html .= "</div>\n";
     return $html;
 }
-
-session_start();
 ?>
 
 <!doctype html>

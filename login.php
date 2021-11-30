@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $menu = array(
     'home' => array('text'=>'Home', 'url'=>'index.php'),
     'login' => array('text'=>'Login', 'url'=>'login.php'),
@@ -59,7 +61,6 @@ function generateMenu($items) {
     return $html;
 }
 
-session_start();
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php?Message=" . urlencode("Already logged in." . $_SESSION["uid"]));
     exit;
