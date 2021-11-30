@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["loggedin"] = true;
                             $_SESSION["uid"] = $uid;
                             $_SESSION["name"] = $name;
-                            $_SESSION["is_staff"] = ($is_staff === 1);
+                            $_SESSION["is_staff"] = $is_staff === 1? true: false;
 
                             $Message = "Successfully logged in!";
                             header("location: index.php?Message=" . urlencode($Message));
