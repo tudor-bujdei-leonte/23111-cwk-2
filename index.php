@@ -77,8 +77,9 @@ function generateMenu($items) {
         echo GenerateMenu($menu);
 
         if (isset($_SESSION["name"]) && isset($_SESSION["loggedin"])) {
-            echo "<p>Welcome back, {$_SESSION['name']}<b></b></p>";
-            echo $_SESSION["is_logged"];
+            echo "<p>Welcome back, <b>{$_SESSION['name']}</b>!</p>";
+        } else {
+            echo "<p>You are not logged in.</p>"
         }
         ?>
 

@@ -62,7 +62,7 @@ function generateMenu($items) {
 }
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: index.php?Message=" . urlencode("Already logged in." . $_SESSION["uid"]));
+    header("location: index.php?Message=" . urlencode("Already logged in."));
     exit;
 }
 
@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["name"] = $name;
                             $_SESSION["is_staff"] = $is_staff;
 
-                            $Message = "Successfully logged in!" . $_SESSION["name"] . $_SESSION["uid"] . $_SESSION["is_staff"];
+                            $Message = "Successfully logged in!";
                             header("location: index.php?Message=" . urlencode($Message));
                         } else {
                             echo '<script>alert("Invalid login credentials.");</script>';
