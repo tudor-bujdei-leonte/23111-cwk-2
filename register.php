@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             mysqli_stmt_close($stmt);
         }
+        $stmt->close;
     }
 
     if (empty(trim($_POST["name"]))) {
@@ -66,7 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_is_staff = $is_staff;
 
             if (mysqli_stmt_execute($stmt)) {
-
+                header("location: login.php");
+                echo "Successfully created account.";
             } else {
                 echo "Something went wrong. Please try again later.";
             }
