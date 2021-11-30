@@ -51,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_psw = password_hash($password, PASSWORD_DEFAULT);
 
             if (mysqli_stmt_execute($stmt)) {
-                echo '<script>alert("Successfully logged in!");</script>';
-                header("location: index.php");
+                $Message = "Successfully logged in!";
+                header("location: index.php?Message=" . urlencode($Message));
             } else {
                 echo "Something went wrong. Please try again later.";
             }
@@ -86,7 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <title>Quizzy!</title>
     </head>
     <body>
-        <?php echo GenerateMenu($menu, "Login"); ?>
+        <?php 
+        if (isset($_GET['Message'])) {
+            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+        }
+
+        echo GenerateMenu($menu, "Home");
+        ?>
 
         <form action="login.php" method="post">
           

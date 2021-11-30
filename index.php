@@ -1,3 +1,28 @@
+<?php
+$menu = array(
+    'home' => array('text'=>'Home', 'url'=>'index.php'),
+    'login' => array('text'=>'Login', 'url'=>'login.php'),
+    'register' => array('text'=>'Register', 'url'=>'register.php'),
+    'take_quiz' => array('text'=>'Take quiz', 'url'=>'index.php'),
+    'create_quiz' => array('text'=>'Create quiz', 'url'=>'index.php'),
+    'modify_quiz' => array('text'=>'Modify quiz', 'url'=>'index.php'),
+);
+
+function generateMenu($items, $active) {
+    $html = "<div class=\"topnav\">\n";
+    foreach($items as $item) {
+        if (strcmp($item['text'], $active) == 0) {
+            $html .= "<a class=\"active\" href='{$item['url']}'>{$item['text']}</a>\n";
+        }
+        else {
+            $html .= "<a href='{$item['url']}'>{$item['text']}</a>\n";
+        }
+    }
+    $html .= "</div>\n";
+    return $html;
+}
+?>
+
 <!doctype html>
 <html>
     <head>
@@ -5,12 +30,13 @@
         <title>Quizzy!</title>
     </head>
     <body>
-        <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="login.html">Log in</a>
-            <a href="#contact">Register</a>
-            <a href="#about">About</a>
-        </div>
+        <?php 
+        if (isset($_GET['Message'])) {
+            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+        }
+
+        echo GenerateMenu($menu, "Home");
+        ?>
 
         <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
     </body>

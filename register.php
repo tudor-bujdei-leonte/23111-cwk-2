@@ -88,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_is_staff = $is_staff;
 
             if (mysqli_stmt_execute($stmt)) {
-                echo '<script>alert("' . "Successfully created account." . '");</script>';
-                header("location: login.php");
+                $Message = "Successfully created account!";
+                header("location: login.php?Message=" . urlencode($Message));
             } else {
                 echo "Something went wrong. Please try again later.";
             }
@@ -129,7 +129,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <title>Quizzy!</title>
     </head>
     <body>
-        <?php echo GenerateMenu($menu, "Register"); ?>
+        <?php 
+        if (isset($_GET['Message'])) {
+            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+        }
+
+        echo GenerateMenu($menu, "Home");
+        ?>
 
         <form action="register.php" method="post">
           
