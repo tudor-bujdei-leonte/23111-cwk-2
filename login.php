@@ -58,21 +58,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($uid_err) && empty($password_err)) {
-        $sql = "SELECT uid FROM users WHERE uid = ? AND password = ?";
+        $sql = "SELECT name, password, is_staff FROM users WHERE uid = ?";
         
         if($stmt = mysqli_prepare($link, $sql)) {
-            mysqli_stmt_bind_param($stmt, "ss", $param_uid, $param_psw);
+            mysqli_stmt_bind_param($stmt, "s", $param_uid);
 
             $param_uid = $uid;
-            $param_psw = password_hash($password, PASSWORD_DEFAULT);
 
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) < 1) {
                     echo '<script>alert("Invalid login credentials.");</script>';
                 } else {
-                    $Message = "Successfully logged in!";
-                    header("location: index.php?Message=" . urlencode($Message));
+                    mysqli_stmt_bind_result($stmt, $name, $hashed_password, $is_staff);
+
+                    if (mysqli_stmt_fetch($stmt)) {
+                        if (password_verify($password, $hashed_password)) {
+                            session_start();
+
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["uid"] = $uid;
+                            $_SESSION["name"] = $name;
+                            $_SESSION["is_staff"] = $is_staff;
+
+                            $Message = "Successfully logged in!";
+                            header("location: index.php?Message=" . urlencode($Message));
+                        } else {
+                            echo '<script>alert("Invalid login credentials.");</script>';
+                        }
+                    } else {
+                        echo '<script>alert("Invalid login credentials.");</script>';
+                    }
                 }
             } else {
                 echo "Something went wrong. Please try again later.";
@@ -94,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
     }
 
-    echo $link->error . '\n' . $stmt->error;
+    // echo $link->error . '\n' . $stmt->error; 
 
     // mysqli_close($link);
 }
