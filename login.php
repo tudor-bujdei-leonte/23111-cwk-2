@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
     }
 
-    // echo $link->error . '\n' . $stmt->error;
+    echo $link->error . '\n' . $stmt->error;
 
     // mysqli_close($link);
 }
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <title>Quizzy!</title>
     </head>
     <body>
-        <?php echo GenerateMenu($menu, "Register"); ?>
+        <?php echo GenerateMenu($menu, "Login"); ?>
 
         <form action="login.php" method="post">
           

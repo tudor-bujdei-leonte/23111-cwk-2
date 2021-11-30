@@ -88,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_is_staff = $is_staff;
 
             if (mysqli_stmt_execute($stmt)) {
-                header("location: login.php");
                 echo '<script>alert("' . "Successfully created account." . '");</script>';
+                header("location: login.php");
             } else {
                 echo "Something went wrong. Please try again later.";
             }
