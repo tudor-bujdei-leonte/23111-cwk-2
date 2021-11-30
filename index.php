@@ -31,7 +31,7 @@ function generateMenu($items) {
         }
         
     }
-    echo $_SERVER['REQUEST_URI'];
+    echo isSuffix('index.php', $_SERVER['REQUEST_URI']);
     $html .= "</div>\n";
     return $html;
 }
