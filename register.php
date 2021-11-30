@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<script>alert("' . $_GET['Message'] . '");</script>';
         }
 
-        echo GenerateMenu($menu, "Home");
+        echo GenerateMenu($menu, "Register");
         ?>
 
         <form action="register.php" method="post">

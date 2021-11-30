@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<script>alert("' . $_GET['Message'] . '");</script>';
         }
 
-        echo GenerateMenu($menu, "Home");
+        echo GenerateMenu($menu, "Login");
         ?>
 
         <form action="login.php" method="post">

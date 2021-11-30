@@ -6,17 +6,13 @@ $menu = array(
     'take_quiz' => array('text'=>'Take quiz', 'url'=>'index.php'),
     'create_quiz' => array('text'=>'Create quiz', 'url'=>'index.php'),
     'modify_quiz' => array('text'=>'Modify quiz', 'url'=>'index.php'),
+    'logout' => array('text'=>'Log out', 'url'=>'logout.php'),
 );
 
-function generateMenu($items, $active) {
+function generateMenu($items) {
     $html = "<div class=\"topnav\">\n";
     foreach($items as $item) {
-        if (strcmp($item['text'], $active) == 0) {
-            $html .= "<a class=\"active\" href='{$item['url']}'>{$item['text']}</a>\n";
-        }
-        else {
-            $html .= "<a href='{$item['url']}'>{$item['text']}</a>\n";
-        }
+        $html .= "<a class="<?php echo ($_SERVER['REQUEST_URI'] == $item['url']) ? 'active':'' ?>" href='{$item['url']}'>{$item['text']}</a>\n";
     }
     $html .= "</div>\n";
     return $html;
@@ -35,7 +31,7 @@ function generateMenu($items, $active) {
             echo '<script>alert("' . $_GET['Message'] . '");</script>';
         }
 
-        echo GenerateMenu($menu, "Home");
+        echo GenerateMenu($menu);
         ?>
 
         <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
