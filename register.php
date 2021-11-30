@@ -1,4 +1,24 @@
 <?php
+$menu = array(
+    'home' => array('text'=>'Home', 'url'=>'index.php'),
+    'login' => array('text'=>'Login', 'url'=>'login.php'),
+    'register' => array('text'=>'Register', 'url'=>'register.php'),
+);
+
+function generateMenu($items, $active) {
+    $html = "<div class=\"topnav\">\n";
+    foreach($items as $item) {
+        if (strcmp($item['text'], $active) == 0) {
+            $html .= "<a class=\"active\" href='{$item['url']}'>{$item['text']}</a>\n";
+        }
+        else {
+            $html .= "<a href='{$item['url']}'>{$item['text']}</a>\n";
+        }
+    }
+    $html .= "</div>\n";
+    return $html;
+}
+
 require_once "config.php";
 
 $uid = $name = $password = "";
@@ -109,11 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <title>Quizzy!</title>
     </head>
     <body>
-        <div class="topnav">
-            <a href="index.html">Home</a>
-            <a href="login.html">Log in</a>
-            <a class="active" href="register.html">Register</a>
-        </div>
+        <?php echo GenerateMenu($menu, "Register"); ?>
 
         <form action="register.php" method="post">
           
