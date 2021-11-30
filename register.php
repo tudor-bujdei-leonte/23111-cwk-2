@@ -29,8 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             mysqli_stmt_close($stmt);
+        } else {
+            echo "Could not start checking. Try again later.";
         }
-        $stmt->close;
     }
 
     if (empty(trim($_POST["name"]))) {
