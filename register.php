@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
         }
     } else {
-        echo $uid_err . "\n" . $name_err "\n" $password_err . "\n" . $confirm_password_err;
+        echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
     }
 
     mysqli_close($link);
