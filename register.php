@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (mysqli_stmt_num_rows($stmt) > 0) {
                     $uid_err = "UID already has an associated account.";
                 } else {
-                    $uid = trim($_POST["username"]);
+                    $uid = trim($_POST["uid"]);
                 }
             } else {
                 echo "Something went wrong. Please try again later.";
