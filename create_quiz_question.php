@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "c" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
         "d" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
         "answer" => $_POST["anscorrect"]
-    ]
+    ];
 
     # if have more questions to complete, move to the next one
     if (count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"])
