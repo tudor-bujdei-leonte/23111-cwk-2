@@ -69,8 +69,13 @@ $_SESSION["quiz"] = [
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # preamble for quiz
     # field checking is already performed in the HTML
-    # update session quiz details
 
+    # update session quiz details
+    $_SESSION["quiz"]["available"] = $_SESSION["is_visible"];
+    $_SESSION["quiz"]["name"] = $_SESSION["quiz_title"];
+    $_SESSION["quiz"]["duration"] = $_SESSION["quiz_time"];
+    $_SESSION["quiz"]["non-author modifiable"] = $_SESSION["is_modifiable"];
+    $_SESSION["quiz"]["num questions"] = $_SESSION["num_questions"];
 
     # prompt for questions
 }
@@ -98,13 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" required>
 
                 <label for="num_questions"><b>Number of questions</b></label>
-                <input type="number" pattern=".*\S+.*" name="num_questions" required>
+                <input type="number" min="1" step="1" pattern=".*\S+.*" name="num_questions" required>
 
-                <label for="quiz_time"><b>Number of questions</b></label>
-                <input type="number" min="1" step="1" name="quiz_time" required>
+                <label for="quiz_time"><b>Estimated time to complete (minutes)</b></label>
+                <input type="number" min="0" step="1" name="quiz_time" required>
 
                 <label>
-                    <input type="checkbox" min="1" step="1" name="is_visible" checked>
+                    <input type="checkbox" name="is_visible" checked>
                     <b>Visible to students?</b>
                 </label>
 

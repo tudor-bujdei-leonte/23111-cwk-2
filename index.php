@@ -81,6 +81,14 @@ function generateMenu($items) {
         } else {
             echo "<p>You are not logged in.</p>";
         }
+
+        if (isset($_SESSION["quiz"])) {
+            echo $_SESSION["quiz"]["available"] . "\n";
+            echo $_SESSION["quiz"]["name"] . "\n";
+            echo $_SESSION["quiz"]["duration"] . "\n";
+            echo $_SESSION["quiz"]["non-author modifiable"] . "\n";
+            echo $_SESSION["quiz"]["num questions"] . "\n";
+        }
         ?>
 
         <!-- <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> -->
