@@ -49,7 +49,7 @@ function generateMenu($items) {
     return $html;
 }
 
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_SESSION["is_staff"]) || !$_SESSION["is_staff"] === false){
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_SESSION["is_staff"]) || $_SESSION["is_staff"] === false){
     header("location: index.php?Message=" . urlencode("Only staff members can create a quiz."));
     exit;
 }
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # preamble for quiz
     # field checking is already performed in the HTML
     # update session quiz details
-    
+
 
     # prompt for questions
 }
