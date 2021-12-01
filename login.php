@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) < 1) {
-                    echo '<script>alert("Invalid login credentials.");</script>';
+                    echo '<p>Invalid login credentials.</p>';
                 } else {
                     mysqli_stmt_bind_result($stmt, $name, $hashed_password, $is_staff);
 
@@ -115,10 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $Message = "Successfully logged in!";
                             header("location: index.php?Message=" . urlencode($Message));
                         } else {
-                            echo '<script>alert("Invalid login credentials.");</script>';
+                            echo '<p>Invalid login credentials.</p>';
                         }
                     } else {
-                        echo '<script>alert("Invalid login credentials.");</script>';
+                        echo '<p>Invalid login credentials.</p>';
                     }
                 }
             } else {
@@ -132,10 +132,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
         if (!empty($uid_err)) {
-            echo '<script>alert("' . $uid_err . '");</script>';
+            echo '<p>' . $uid_err . '</p>';
         }
         if (!empty($password_err)) {
-            echo '<script>alert("' . $password_err . '");</script>';
+            echo '<p>' . $password_err . '</p>';
         }
         
         // echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
@@ -156,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <body>
         <?php 
         if (isset($_GET['Message'])) {
-            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+            echo '<p>' . $_GET['Message'] . '</p>';
         }
 
         echo GenerateMenu($menu);

@@ -148,16 +148,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
         if (!empty($uid_err)) {
-            echo '<script>alert("' . $uid_err . '");</script>';
+            echo '<p>' . $uid_err . '</p>';
         }
         if (!empty($name_err)) {
-            echo '<script>alert("' . $name_err . '");</script>';
+            echo '<p>' . $name_err . '</p>';
         }
         if (!empty($password_err)) {
-            echo '<script>alert("' . $password_err . '");</script>';
+            echo '<p>' . $password_err . '</p>';
         }
         if (!empty($confirm_password_err)) {
-            echo '<script>alert("' . $confirm_password_err . '");</script>';
+            echo '<p>' . $confirm_password_err . '</p>';
         }
         
         // echo $uid_err . '\n' . $name_err . '\n' . $password_err . '\n' . $confirm_password_err;
@@ -178,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <body>
         <?php 
         if (isset($_GET['Message'])) {
-            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+            echo '<p>' . $_GET['Message'] . '</p>';
         }
 
         echo GenerateMenu($menu);

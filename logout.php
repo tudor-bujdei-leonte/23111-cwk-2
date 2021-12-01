@@ -81,7 +81,7 @@ if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)) {
     <body>
         <?php 
         if (isset($_GET['Message'])) {
-            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+            echo '<p>' . $_GET['Message'] . '</p>';
         }
 
         echo GenerateMenu($menu);

@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <body>
         <?php 
         if (isset($_GET['Message'])) {
-            echo '<script>alert("' . $_GET['Message'] . '");</script>';
+            echo '<p>' . $_GET['Message'] . '</p>';
         }
 
         echo GenerateMenu($menu);
