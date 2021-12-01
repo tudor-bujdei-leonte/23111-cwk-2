@@ -165,14 +165,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="login.php" method="post">
           
             <div class="container">
-              <label for="uid"><b>University ID</b></label>
-              <input type="text" placeholder="Enter username" name="uid" required>
-              
-              <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Enter password" name="psw" required>
-          
-              <button type="submit">Login</button>
+                <label for="uid"><b>University ID</b></label>
+                <input type="text" placeholder="Enter username" name="uid" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter password" name="psw" required>
+
+                <button type="submit">Login</button>
             </div>
-          </form>
+        </form>
     </body>
 </html>
