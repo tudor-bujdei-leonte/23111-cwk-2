@@ -71,10 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # field checking is already performed in the HTML
 
     # update session quiz details
-    $_SESSION["quiz"]["available"] = $_POST["is_visible"];
+    $_SESSION["quiz"]["available"] = strcmp($_POST["is_visible"], "on") === 0? true : false;
     $_SESSION["quiz"]["name"] = $_POST["quiz_title"];
     $_SESSION["quiz"]["duration"] = $_POST["quiz_time"];
-    $_SESSION["quiz"]["non-author modifiable"] = $_POST["is_modifiable"];
+    $_SESSION["quiz"]["non-author modifiable"] = strcmp($_POST["is_modifiable"], "on") === 0? true : false;
     $_SESSION["quiz"]["num questions"] = $_POST["num_questions"];
 
     # prompt for questions

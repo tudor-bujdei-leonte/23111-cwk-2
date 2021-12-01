@@ -85,7 +85,7 @@ function generateMenu($items) {
         if (isset($_SESSION["quiz"])) {
             echo $_SESSION["quiz"]["available"] . "\n";
             echo $_SESSION["quiz"]["name"] . "\n";
-            echo $_SESSION["quiz"]["duration"] . "\n";
+            echo ($_SESSION["quiz"]["duration"] + 10) . "\n";
             echo $_SESSION["quiz"]["non-author modifiable"] . "\n";
             echo $_SESSION["quiz"]["num questions"] . "\n";
         }
