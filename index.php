@@ -62,7 +62,7 @@ function generateMenu($items) {
 }
 
 $earray = [];
-array_push($earray, ["first" => "a", "second" => "b"])
+array_push($earray, ["first" => "a", "second" => "b"]);
 foreach ($earray as $item) {
     echo $item["first"] . $item["second"];
 }
