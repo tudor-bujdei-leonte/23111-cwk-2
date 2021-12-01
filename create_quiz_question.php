@@ -61,6 +61,12 @@ if(!isset($_SESSION["quiz"]) || $_SESSION["quiz"]["num questions"] === 0){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # preamble for question
     # field checking is already performed in the HTML
+    # except for correct answer
+    $ans = $_POST["anscorrect"];
+    if (empty($_POST["ans" . $ans])) {
+        echo '<script>alert("The correct answer must be one of the possible answers.");</script>';
+        return;
+    }
 
     # insert question into list
     $_SESSION["quiz"]["questions"] += [
@@ -130,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>Note: Only multiple choice quizzes are supported at the moment. If the question has fewer than 4 possible answers, leave the remaining fields blank.</p><br>
 
                 <label for="uid"><b>Correct answer (a-d):</b></label>
-                <input type="text" pattern="^(a-d)$" placeholder="Enter username" name="anscorrect" required>
+                <input type="text" pattern="^[a-d]$" placeholder="Enter correct answer letter" name="anscorrect" required>
 
                 <button type="submit"><?php if(count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"]) {echo "Submit";} else {echo "Next";} ?></button>
 
