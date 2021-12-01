@@ -82,13 +82,17 @@ function generateMenu($items) {
             echo "<p>You are not logged in.</p>";
         }
 
-        // if (isset($_SESSION["quiz"])) {
-        //     echo $_SESSION["quiz"]["available"] . "\n";
-        //     echo $_SESSION["quiz"]["name"] . "\n";
-        //     echo ($_SESSION["quiz"]["duration"] + 10) . "\n";
-        //     echo $_SESSION["quiz"]["non-author modifiable"] . "\n";
-        //     echo $_SESSION["quiz"]["num questions"] . "\n";
-        // }
+        if (isset($_SESSION["quiz"])) {
+            echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+            foreach ($_SESSION["quiz"]["questions"] as $question) {
+                echo "Question text: " . $question["text"] . "<br>";
+                echo "Answer a" . $question["a"] . "<br>";
+                echo "Answer a" . $question["a"] . "<br>";
+                echo "Answer a" . $question["a"] . "<br>";
+                echo "Answer a" . $question["a"] . "<br>";
+                echo "Correct answer" . $question["a"] . "<br>";
+            }
+        }
         ?>
 
         <!-- <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> -->
