@@ -60,6 +60,12 @@ function generateMenu($items) {
     $html .= "</div>\n";
     return $html;
 }
+
+$earray = [];
+array_push($earray, ["first" => "a", "second" => "b"])
+foreach ($earray as $item) {
+    echo $item["first"] . $item["second"];
+}
 ?>
 
 <!doctype html>
