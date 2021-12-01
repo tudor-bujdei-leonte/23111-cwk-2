@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION["quiz"]["num questions"] = $_POST["num_questions"];
 
     # prompt for questions
+    header("location: create_quiz_question.php");
 }
 ?>
 
@@ -97,8 +98,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
 
         <form action="create_quiz.php" method="post">
-            
             <div class="container">
+
                 <label for="quiz_title"><b>Quiz title</b></label>
                 <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" required>
 
@@ -119,31 +120,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </label>
 
                 <button type="submit">Next</button>
-
-
-
-                <!-- <label for="psw"><b>Question text</b></label>
-                <input type="password" placeholder="Enter password" name="psw" required>
-
-                <label for="uid"><b>Answer a</b></label>
-                <input type="text" placeholder="Enter username" name="uid" required>
-
-                <label for="uid"><b>Answer b</b></label>
-                <input type="text" placeholder="Enter username" name="uid" required>
-
-                <label for="uid"><b>Answer c</b></label>
-                <input type="text" placeholder="Enter username" name="uid" required>
-
-                <label for="uid"><b>Answer d</b></label>
-                <input type="text" placeholder="Enter username" name="uid" required>
-
-                <label for="uid"><b>Correct answer</b></label>
-                <input type="text" placeholder="Enter username" name="uid" required>
-
-                <label for="uid"><b>Estimated time (minutes)</b></label>
-                <input type="text" placeholder="Enter username" name="uid" required>
-
-                <button type="submit">Next</button> -->
 
             </div>
         </form>
