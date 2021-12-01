@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # except for correct answer
     $ans = $_POST["anscorrect"];
     if (empty($_POST["ans" . $ans])) {
-        echo '<script>alert("The correct answer must be one of the possible answers.");</script>';
+        echo 'The correct answer must be one of the possible answers.';
         return;
     }
 
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="create_quiz.php" method="post">
             <div class="container">
 
-                <label><h3>Question <?php echo strval(count($_SESSION["quiz"]["questions"]) + 1) . "/" . strval($_SESSION["quiz"]["num questions"]) ?></h3></label>
+                <label><h3>Question <?php echo strval(count($_SESSION["quiz"]["questions"]) + 1) . "/" . strval($_SESSION["quiz"]["num questions"]); ?></h3></label>
 
                 <label for="qtext"><b>Question text</b></label>
                 <input type="text" pattern=".*\S+.*" placeholder="Enter question text" name="qtext" required>
@@ -135,8 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <p>Note: Only multiple choice quizzes are supported at the moment. If the question has fewer than 4 possible answers, leave the remaining fields blank.</p><br>
 
-                <label for="uid"><b>Correct answer (a-d):</b></label>
-                <input type="text" pattern="^[a-d]$" placeholder="Enter correct answer letter" name="anscorrect" required>
+                <label for="uid"><b>Correct answer:</b></label>
+                <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to correct answer" name="anscorrect" required>
 
                 <button type="submit"><?php if(count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"]) {echo "Submit";} else {echo "Next";} ?></button>
 
