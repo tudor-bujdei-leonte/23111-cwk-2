@@ -81,10 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
         # if have more questions to complete, move to the next one
-        if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"])
+        if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"]){
             header("location: create_quiz_question.php");
-        # else insert quiz
-        else {
+            return
+        } else { # else insert quiz
             // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
             // foreach ($_SESSION["quiz"]["questions"] as $question) {
             //     echo "Question text: " . $question["text"] . "<br>";
@@ -100,17 +100,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-if (isset($_SESSION["quiz"])) {
-    echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-    foreach ($_SESSION["quiz"]["questions"] as $question) {
-        echo "Question text: " . $question["text"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Correct answer" . $question["a"] . "<br>";
-    }
-}
+// if (isset($_SESSION["quiz"])) {
+//     echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+//     foreach ($_SESSION["quiz"]["questions"] as $question) {
+//         echo "Question text: " . $question["text"] . "<br>";
+//         echo "Answer a: " . $question["ansa"] . "<br>";
+//         echo "Answer b: " . $question["ansb"] . "<br>";
+//         echo "Answer c: " . $question["ansc"] . "<br>";
+//         echo "Answer d: " . $question["ansd"] . "<br>";
+//         echo "Correct answer: " . $question["anscorrect"] . "<br>";
+//     }
+// }
 ?>
 
 <!doctype html>
@@ -153,8 +153,8 @@ if (isset($_SESSION["quiz"])) {
                 <label for="uid"><b>Correct answer:</b></label>
                 <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to correct answer" name="anscorrect" required>
 
-                <!-- <button type="submit"><?php if(count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"]) {echo "Submit";} else {echo "Next";} ?></button> -->
-                <button type="submit">Next</button>
+                <button type="submit"><?php if(count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"]) {echo "Submit";} else {echo "Next";} ?></button>
+                <!-- <button type="submit">Next</button> -->
 
             </div>
         </form>
