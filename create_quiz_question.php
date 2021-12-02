@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         # if have more questions to complete, move to the next one
         if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"]){
-            header("location: create_quiz_question.php?Message=" . urlencode(echo strval(count($_SESSION["quiz"]["questions"]) + 1) . "/" . strval($_SESSION["quiz"]["num questions"])));
+            header("location: create_quiz_question.php?Message=" . urlencode(strval(count($_SESSION["quiz"]["questions"]) + 1) . "/" . strval($_SESSION["quiz"]["num questions"])));
             exit;
         } else { # else insert quiz
             // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
