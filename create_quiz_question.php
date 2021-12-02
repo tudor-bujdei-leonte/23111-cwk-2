@@ -83,22 +83,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
     # if have more questions to complete, move to the next one
-    if (count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"])
-        header("location: create_quiz_question.php");
-    # else insert quiz
-    else {
-        // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-        // foreach ($_SESSION["quiz"]["questions"] as $question) {
-        //     echo "Question text: " . $question["text"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Correct answer" . $question["a"] . "<br>";
-        // }
+    // if (count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"])
+    //     header("location: create_quiz_question.php");
+    // # else insert quiz
+    // else {
+    //     // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+    //     // foreach ($_SESSION["quiz"]["questions"] as $question) {
+    //     //     echo "Question text: " . $question["text"] . "<br>";
+    //     //     echo "Answer a" . $question["a"] . "<br>";
+    //     //     echo "Answer a" . $question["a"] . "<br>";
+    //     //     echo "Answer a" . $question["a"] . "<br>";
+    //     //     echo "Answer a" . $question["a"] . "<br>";
+    //     //     echo "Correct answer" . $question["a"] . "<br>";
+    //     // }
 
-        header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
-    }
+    //     header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+    // }
 }
 
 if (isset($_SESSION["quiz"])) {
