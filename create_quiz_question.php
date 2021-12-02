@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return;
     }
 
-    echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+    // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
     # insert question into list
     array_push($_SESSION["quiz"]["questions"], [
@@ -80,25 +80,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "answer" => $_POST["anscorrect"]
     ]);
 
-    echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+    // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
     # if have more questions to complete, move to the next one
-    // if (count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"])
-    //     header("location: create_quiz_question.php");
-    // # else insert quiz
-    // else {
-    //     // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-    //     // foreach ($_SESSION["quiz"]["questions"] as $question) {
-    //     //     echo "Question text: " . $question["text"] . "<br>";
-    //     //     echo "Answer a" . $question["a"] . "<br>";
-    //     //     echo "Answer a" . $question["a"] . "<br>";
-    //     //     echo "Answer a" . $question["a"] . "<br>";
-    //     //     echo "Answer a" . $question["a"] . "<br>";
-    //     //     echo "Correct answer" . $question["a"] . "<br>";
-    //     // }
+    if (count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"])
+        header("location: create_quiz_question.php");
+    # else insert quiz
+    else {
+        // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+        // foreach ($_SESSION["quiz"]["questions"] as $question) {
+        //     echo "Question text: " . $question["text"] . "<br>";
+        //     echo "Answer a" . $question["a"] . "<br>";
+        //     echo "Answer a" . $question["a"] . "<br>";
+        //     echo "Answer a" . $question["a"] . "<br>";
+        //     echo "Answer a" . $question["a"] . "<br>";
+        //     echo "Correct answer" . $question["a"] . "<br>";
+        // }
 
-    //     header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
-    // }
+        header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+    }
 }
 
 if (isset($_SESSION["quiz"])) {
@@ -129,7 +129,7 @@ if (isset($_SESSION["quiz"])) {
         echo GenerateMenu($menu);
         ?>
 
-        <form action="create_quiz.php" method="post">
+        <form action="create_quiz_question.php" method="post">
             <div class="container">
 
                 <label><h3>Question <?php echo strval(count($_SESSION["quiz"]["questions"]) + 1) . "/" . strval($_SESSION["quiz"]["num questions"]); ?></h3></label>
@@ -154,7 +154,8 @@ if (isset($_SESSION["quiz"])) {
                 <label for="uid"><b>Correct answer:</b></label>
                 <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to correct answer" name="anscorrect" required>
 
-                <button type="submit"><?php if(count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"]) {echo "Submit";} else {echo "Next";} ?></button>
+                <!-- <button type="submit"><?php if(count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"]) {echo "Submit";} else {echo "Next";} ?></button> -->
+                <button type="submit">Next</button>
 
             </div>
         </form>
