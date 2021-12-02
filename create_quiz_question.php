@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location: create_quiz_question.php?Message=" . urlencode('The correct answer must be one of the possible answers.'));
         exit;
     } else {
-        // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+        echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
         # insert question into list
         array_push($_SESSION["quiz"]["questions"], [
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "answer" => $_POST["anscorrect"]
         ]);
 
-        // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+        echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
         # if have more questions to complete, move to the next one
         if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"]){
