@@ -68,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return;
     }
 
+    echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+
     # insert question into list
     array_push($_SESSION["quiz"]["questions"], [
         "text" => $_POST["qtext"],
@@ -77,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "d" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
         "answer" => $_POST["anscorrect"]
     ]);
+
+    echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
     # if have more questions to complete, move to the next one
     if (count($_SESSION["quiz"]["questions"]) + 1 === $_SESSION["quiz"]["num questions"])
