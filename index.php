@@ -87,11 +87,11 @@ function generateMenu($items) {
             echo strval(count($_SESSION["quiz"]["questions"])) . "/" . strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
             foreach ($_SESSION["quiz"]["questions"] as $question) {
                 echo "Question text: " . $question["text"] . "<br>";
-                echo "Answer a: " . $question["ansa"] . "<br>";
-                echo "Answer b: " . $question["ansb"] . "<br>";
-                echo "Answer c: " . $question["ansc"] . "<br>";
-                echo "Answer d: " . $question["ansd"] . "<br>";
-                echo "Correct answer: " . $question["anscorrect"] . "<br>";
+                echo "Answer a: " . $question["a"] . "<br>";
+                echo "Answer b: " . $question["b"] . "<br>";
+                echo "Answer c: " . $question["c"] . "<br>";
+                echo "Answer d: " . $question["d"] . "<br>";
+                echo "Correct answer: " . $question["answer"] . "<br>";
             }
         }
         ?>
