@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # except for correct answer
     $ans = $_POST["anscorrect"];
     if (empty($_POST["ans" . $ans])) {
-        header("location: create_quiz_question.php" . urlencode('The correct answer must be one of the possible answers.'));
+        header("location: create_quiz_question.php?Message=" . urlencode('The correct answer must be one of the possible answers.'));
     } else {
         // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
