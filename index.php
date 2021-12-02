@@ -61,18 +61,6 @@ function generateMenu($items) {
     return $html;
 }
 
-if (isset($_SESSION["quiz"])) {
-    echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-    foreach ($_SESSION["quiz"]["questions"] as $question) {
-        echo "Question text: " . $question["text"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Answer a" . $question["a"] . "<br>";
-        echo "Correct answer" . $question["a"] . "<br>";
-    }
-}
-
 ?>
 
 <!doctype html>
@@ -96,14 +84,14 @@ if (isset($_SESSION["quiz"])) {
         }
 
         if (isset($_SESSION["quiz"])) {
-            echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+            echo strval(count($_SESSION["quiz"]["questions"])) . "/" . strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
             foreach ($_SESSION["quiz"]["questions"] as $question) {
                 echo "Question text: " . $question["text"] . "<br>";
-                echo "Answer a" . $question["a"] . "<br>";
-                echo "Answer a" . $question["a"] . "<br>";
-                echo "Answer a" . $question["a"] . "<br>";
-                echo "Answer a" . $question["a"] . "<br>";
-                echo "Correct answer" . $question["a"] . "<br>";
+                echo "Answer a: " . $question["ansa"] . "<br>";
+                echo "Answer b: " . $question["ansb"] . "<br>";
+                echo "Answer c: " . $question["ansc"] . "<br>";
+                echo "Answer d: " . $question["ansd"] . "<br>";
+                echo "Correct answer: " . $question["anscorrect"] . "<br>";
             }
         }
         ?>
