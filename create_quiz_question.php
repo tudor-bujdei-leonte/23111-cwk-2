@@ -96,6 +96,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
     }
 }
+
+if (isset($_SESSION["quiz"])) {
+    echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+    foreach ($_SESSION["quiz"]["questions"] as $question) {
+        echo "Question text: " . $question["text"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Correct answer" . $question["a"] . "<br>";
+    }
+}
 ?>
 
 <!doctype html>

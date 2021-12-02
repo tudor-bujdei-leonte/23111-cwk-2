@@ -61,11 +61,18 @@ function generateMenu($items) {
     return $html;
 }
 
-$earray = [];
-array_push($earray, ["first" => "a", "second" => "b"]);
-foreach ($earray as $item) {
-    echo $item["first"] . $item["second"];
+if (isset($_SESSION["quiz"])) {
+    echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+    foreach ($_SESSION["quiz"]["questions"] as $question) {
+        echo "Question text: " . $question["text"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Answer a" . $question["a"] . "<br>";
+        echo "Correct answer" . $question["a"] . "<br>";
+    }
 }
+
 ?>
 
 <!doctype html>
