@@ -65,38 +65,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ans = $_POST["anscorrect"];
     if (empty($_POST["ans" . $ans])) {
         header("location: create_quiz_question.php" . urlencode('The correct answer must be one of the possible answers.'));
-    }
+    } else {
+        // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
-    // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+        # insert question into list
+        array_push($_SESSION["quiz"]["questions"], [
+            "text" => $_POST["qtext"],
+            "a" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
+            "b" => empty($_POST["ansb"]) ? NULL : $_POST["ansb"],
+            "c" => empty($_POST["ansc"]) ? NULL : $_POST["ansc"],
+            "d" => empty($_POST["ansd"]) ? NULL : $_POST["ansd"],
+            "answer" => $_POST["anscorrect"]
+        ]);
 
-    # insert question into list
-    array_push($_SESSION["quiz"]["questions"], [
-        "text" => $_POST["qtext"],
-        "a" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
-        "b" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
-        "c" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
-        "d" => empty($_POST["ansa"]) ? NULL : $_POST["ansa"],
-        "answer" => $_POST["anscorrect"]
-    ]);
+        // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
-    // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
+        # if have more questions to complete, move to the next one
+        if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"])
+            header("location: create_quiz_question.php");
+        # else insert quiz
+        else {
+            // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+            // foreach ($_SESSION["quiz"]["questions"] as $question) {
+            //     echo "Question text: " . $question["text"] . "<br>";
+            //     echo "Answer a" . $question["a"] . "<br>";
+            //     echo "Answer a" . $question["a"] . "<br>";
+            //     echo "Answer a" . $question["a"] . "<br>";
+            //     echo "Answer a" . $question["a"] . "<br>";
+            //     echo "Correct answer" . $question["a"] . "<br>";
+            // }
 
-    # if have more questions to complete, move to the next one
-    if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"])
-        header("location: create_quiz_question.php");
-    # else insert quiz
-    else {
-        // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-        // foreach ($_SESSION["quiz"]["questions"] as $question) {
-        //     echo "Question text: " . $question["text"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Answer a" . $question["a"] . "<br>";
-        //     echo "Correct answer" . $question["a"] . "<br>";
-        // }
-
-        header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+            header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+        }
     }
 }
 
