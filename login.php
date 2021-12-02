@@ -114,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             $Message = "Successfully logged in!";
                             header("location: index.php?Message=" . urlencode($Message));
+                            exit;
                         } else {
                             echo '<p>Invalid login credentials.</p>';
                         }

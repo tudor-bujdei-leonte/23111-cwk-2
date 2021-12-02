@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     # prompt for questions
     header("location: create_quiz_question.php");
+    exit;
 }
 
 if (isset($_SESSION["quiz"])) {

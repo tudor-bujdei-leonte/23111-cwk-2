@@ -65,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ans = $_POST["anscorrect"];
     if (empty($_POST["ans" . $ans])) {
         header("location: create_quiz_question.php?Message=" . urlencode('The correct answer must be one of the possible answers.'));
+        exit;
     } else {
         // echo "<script>alert(\"" . strval(count($_SESSION["quiz"]["questions"])) . "\");</script>";
 
@@ -83,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         # if have more questions to complete, move to the next one
         if (count($_SESSION["quiz"]["questions"]) !== $_SESSION["quiz"]["num questions"]){
             header("location: create_quiz_question.php");
-            return
+            exit;
         } else { # else insert quiz
             // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
             // foreach ($_SESSION["quiz"]["questions"] as $question) {
@@ -96,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // }
 
             header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+            exit;
         }
     }
 }
