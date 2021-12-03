@@ -322,7 +322,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
                     $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"], // could be newly added
                 "deleted" => true
-            ])
+            ]);
             // if new question, save quiz
             // else, next question
         } elseif ($_POST["submitted"] == "save") {
