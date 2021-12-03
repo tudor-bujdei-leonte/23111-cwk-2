@@ -342,8 +342,8 @@ function saveActiveQuiz() {
     }
 
     if (mysqli_multi_query($link, $sql)) {
-        header("location: index.php?Message=" . urlencode($sql));
-        // header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
+        // header("location: index.php?Message=" . urlencode($sql));
+        header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
         exit;   
     } else echo "Error. Please try again later.";
     echo mysqli_error($link);
