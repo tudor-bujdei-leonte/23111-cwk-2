@@ -262,6 +262,20 @@ function setOldQuizDetails($qid) {
     mysqli_stmt_close($stmt);
 }
 
+function deleteActiveQuiz() {
+    require_once "config.php";
+    
+    $sql = "DELETE FROM quizzes WHERE id = " . $_SESSION["m-quiz"]["id"];
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        if (mysqli_stmt_execute_stmt($stmt)) {
+            header("location: index.php?Message=" . urlencode("Successfully deleted quiz."));
+            exit;
+        } else echo "An error occurred. Please try again later.";
+    } else echo "An error occurred. Please try again later.";
+    mysqli_stmt_close($stmt);
+}
+
 // submit form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "cancel") {
@@ -278,16 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["m-quiz-state"]++;
     } elseif ($_SESSION["m-quiz-state"] == 0) {
         if ($_POST["submitted"] == "delete") {
-            $sql = "DELETE FROM quizzes WHERE id = " . $_SESSION["m-quiz"]["id"];
-
-            if ($stmt = mysqli_prepare($link, $sql)) {
-                if (mysqli_stmt_execute_stmt($stmt)) {
-                    header("location: index.php?Message=" . urlencode("Successfully deleted quiz."));
-                    exit;
-                } else echo "An error occurred. Please try again later.";
-            } else echo "An error occurred. Please try again later.";
-            mysqli_stmt_close($stmt);
-
+            deleteActiveQuiz();
         } else {
 
             // get new details of quiz
