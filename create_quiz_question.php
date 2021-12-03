@@ -83,21 +83,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         # if have more questions to complete, move to the next one
         if (count($_SESSION["quiz"]["questions"]) != $_SESSION["quiz"]["num questions"]){
-            header("location: create_quiz_question.php?Message=" . urlencode(strval(count($_SESSION["quiz"]["questions"]) - $_SESSION["quiz"]["num questions"])));
+            header("location: create_quiz_question.php"); # ?Message=" . urlencode(strval(count($_SESSION["quiz"]["questions"]) - $_SESSION["quiz"]["num questions"])));
             exit;
         } else { # else insert quiz
-            // echo strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-            // foreach ($_SESSION["quiz"]["questions"] as $question) {
-            //     echo "Question text: " . $question["text"] . "<br>";
-            //     echo "Answer a" . $question["a"] . "<br>";
-            //     echo "Answer a" . $question["a"] . "<br>";
-            //     echo "Answer a" . $question["a"] . "<br>";
-            //     echo "Answer a" . $question["a"] . "<br>";
-            //     echo "Correct answer" . $question["a"] . "<br>";
-            // }
+            
+            $sql = "INSERT INTO quizzes SET author_uid = ?, title = ?, duration = ?, available = ?, modifiable = ?";
 
-            header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
-            exit;
+            if ($stmt = mysqli_prepare($link, $sql)) {
+                mysqli_stmt_bind_param($stmt, "ssiii", 
+                    $_SESSION["quiz"]["author"], 
+                    $_SESSION["quiz"]["name"], 
+                    $_SESSION["quiz"]["duration"], 
+                    $_SESSION["quiz"]["available"] ? 1 : 0,
+                    $_SESSION["quiz"]["non-author modifiable"] ? 1 : 0
+                );
+
+                if (mysqli_stmt_execute($stmt)) {
+                    $Message = "Successfully created quiz!";
+                    header("location: login.php?Message=" . urlencode($Message));
+                    exit;
+                } else echo "Something went wrong. Please try again later.";
+            } else echo "Something went wrong. Please try again later.";
         }
     }
 }
