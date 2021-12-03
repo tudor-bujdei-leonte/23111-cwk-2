@@ -146,7 +146,7 @@ function mainTakeQuiz() {
             "questions" => [],
             "correct answers" => 0,
             "answers" => 0
-        ]
+        ];
     }
 
     if ($_SESSION["t-quiz-state"] == -1) {
