@@ -283,6 +283,8 @@ function deleteActiveQuiz() {
 }
 
 function saveActiveQuiz() {
+    require_once "config.php";
+
     $id = $_SESSION["m-quiz"]["id"];
     $title = $_SESSION["m-quiz"]["new"]["title"];
     $duration = $_SESSION["m-quiz"]["new"]["duration"];
@@ -313,7 +315,7 @@ function saveActiveQuiz() {
             $b = empty($question["b"]) ? "NULL" : "\"" . $question["b"] . "\"";
             $c = empty($question["c"]) ? "NULL" : "\"" . $question["c"] . "\"";
             $d = empty($question["d"]) ? "NULL" : "\"" . $question["d"] . "\"";
-            $answer = $question["answer"];
+            $answer = "\"" . $question["answer"] . "\"";
 
             if ($id == -1) {
                 $sql .= "INSERT INTO quiz_questions
@@ -337,6 +339,14 @@ function saveActiveQuiz() {
             }
         }
     }
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        if (mysqli_stmt_execute($stmt)) {
+            header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
+            exit;
+        } else echo "Error. Please try again later.";
+    } else echo "Error. Please try again later.";
+    mysqli_stmt_close($stmt);
     
     header("location: index.php?Message=" . urlencode($sql));
     exit;
