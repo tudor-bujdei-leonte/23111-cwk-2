@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("location: create_quiz_question.php"); # ?Message=" . urlencode(strval(count($_SESSION["quiz"]["questions"]) - $_SESSION["quiz"]["num questions"])));
             exit;
         } else { # else insert quiz
-            
+            $success = true;
             $sql = "INSERT INTO quizzes SET author_uid = ?, title = ?, duration = ?, available = ?, modifiable = ?";
 
             if ($stmt = mysqli_prepare($link, $sql)) {
@@ -102,8 +102,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if ($quiz_id = mysqli_stmt_execute($stmt)) {
                     // great! But I don't even know if the opposite returns 0, null, -1, nullptr, or something else.
-                } else echo "Something went wrong. Please try again later.";
-            } else echo "Something went wrong. Please try again later.";
+                } else { 
+                    echo "Something went wrong. Please try again later.";
+                    $success = false;
+                }
+            } else { 
+                echo "Something went wrong. Please try again later.";
+                $success = false;
+            }
             mysqli_stmt_close($stmt);
 
             foreach ($_SESSION["quiz"]["questions"] as $question) {
@@ -123,13 +129,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if (mysqli_stmt_execute($stmt)) {
                         // cool! keep it up!
-                    } else echo "Something went wrong. Please try again later.";
-                } else echo "Something went wrong. Please try again later.";
+                    } else { 
+                        echo "Something went wrong. Please try again later.";
+                        $success = false;
+                    }
+                } else { 
+                    echo "Something went wrong. Please try again later.";
+                    $success = false;
+                }
                 mysqli_stmt_close($stmt);
             }
 
-            header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
-            exit;
+            if ($success) {
+                header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+                exit;
+            }
         }
     }
 }
