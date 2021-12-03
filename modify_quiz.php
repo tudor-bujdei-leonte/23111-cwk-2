@@ -342,7 +342,8 @@ function saveActiveQuiz() {
     }
 
     if (mysqli_multi_query($link, $sql)) {
-        header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
+        header("location: index.php?Message=" . urlencode($sql));
+        // header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
         exit;   
     } else echo "Error. Please try again later.";
     echo mysqli_error($link);
@@ -469,9 +470,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         modify_quiz_main();
 
-        foreach ($_SESSION["m-quiz"]["new"]["questions"] as $question) {
-            echo "Question " . $question["id"] . "<br>";
-        }
+        // foreach ($_SESSION["m-quiz"]["new"]["questions"] as $question) {
+        //     echo "Question " . $question["id"] . "<br>";
+        // }
         ?>
 
     </body>
