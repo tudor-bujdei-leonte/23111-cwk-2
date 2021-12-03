@@ -277,17 +277,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION["m-quiz-state"]++;
     } elseif ($_SESSION["m-quiz-state"] == 0) {
-        // get new details of quiz
-        $_SESSION["m-quiz"]["new"] = [
-            "title" => $_POST["quiz_title"],
-            "duration" => $_POST["quiz_time"],
-            "available" => isset($_POST["is_visible"]) ? 1 : 0,
-            "modifiable" => isset($_POST["is_modifiable"]) ? 1 : 0,
-            "current question" => 1,
-            "deleted questions" => 0
-        ];
+        if ($_POST["submitted"] == "delete") {
+            $sql = "DELETE FROM quizzes WHERE id = " . $_SESSION["m-quiz"]["id"];
 
-        $_SESSION["m-quiz-state"]++;
+            if ($stmt = mysqli_prepare($link, $sql)) {
+                if (mysqli_stmt_execute_stmt($stmt)) {
+                    header("location: index.php?Message=" . urlencode("Successfully deleted quiz."));
+                    exit;
+                } else echo "An error occurred. Please try again later.";
+            } else echo "An error occurred. Please try again later.";
+            mysqli_stmt_close($stmt);
+
+        } else {
+
+            // get new details of quiz
+            $_SESSION["m-quiz"]["new"] = [
+                "title" => $_POST["quiz_title"],
+                "duration" => $_POST["quiz_time"],
+                "available" => isset($_POST["is_visible"]) ? 1 : 0,
+                "modifiable" => isset($_POST["is_modifiable"]) ? 1 : 0,
+                "current question" => 1,
+                "deleted questions" => 0
+            ];
+
+            $_SESSION["m-quiz-state"]++;
+        }
     } else {
         // get new details of question
 
