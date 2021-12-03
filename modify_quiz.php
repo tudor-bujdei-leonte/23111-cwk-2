@@ -54,9 +54,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_
     exit;
 }
 
-require_once "config.php";
-
 function getModifiableQuizzes($uid) {
+    require_once "config.php";
+    
     $titles = [];
 
     $sql = "SELECT title FROM quizzes WHERE author_uid = ? OR modifiable = 1"; // duplicate names are allowed but impossible to recover
