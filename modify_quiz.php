@@ -308,6 +308,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "duration" => $_POST["quiz_time"],
                 "available" => isset($_POST["is_visible"]) ? 1 : 0,
                 "modifiable" => isset($_POST["is_modifiable"]) ? 1 : 0,
+                "questions" => [],
                 "current question" => 1,
                 "deleted questions" => 0
             ];
