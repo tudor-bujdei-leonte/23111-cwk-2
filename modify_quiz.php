@@ -99,7 +99,7 @@ function getQuizDetailsForm($qid) {
             <div class="container">
 
                 <label for="quiz_title"><b>Quiz title</b></label>
-                <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" value="' . $details["title"] . '" required>
+                <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" value="' . $_SESSION["m-quiz"]["old"]["title"] . '" required>
 
                 <label for="quiz_time"><b>Estimated time to complete (minutes)</b></label>
                 <input type="number" min="0" step="1" name="quiz_time" value="' . $_SESSION["m-quiz"]["old"]["duration"] . '" required>
@@ -149,7 +149,7 @@ function modify_quiz_main() {
     } elseif ($_SESSION["m-quiz-state"] == 0) {
         echo getQuizDetailsForm($_SESSION["m-quiz"]["id"]); // next or delete
         foreach ($_SESSION["m-quiz"]["old"]["questions"] as $question) {
-            echo $question["title"] . "<br>";
+            echo $question["text"] . "<br>";
         }
     } else {
         // next or delete question
