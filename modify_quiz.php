@@ -94,28 +94,6 @@ function getSelectTag($lines, $name, $title, $post) {
     return $s;
 }
 
-function getQuizDetailsFormFill($qid) {
-    require_once "config.php";
-
-    $sql = "SELECT title, duration, available, modifiable FROM quizzes WHERE id = " . strval($qid);
-    $details = [
-        "title" => "",
-        "duration" => 0,
-        "visible" => 0,
-        "modifiable" => 0
-    ];
-
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        if (mysqli_stmt_execute($stmt)) {
-            mysqli_stmt_store_result($stmt);
-            mysqli_stmt_bind_result($stmt, $details["title"], $details["duration"], $details["visible"], $details["modifiable"]);
-            mysqli_stmt_fetch($stmt);
-        } else echo "An error occurred. Please try again later.";
-    } else echo "An error occurred. Please try again later.";
-
-    return $details;
-}
-
 function getQuizDetailsForm($qid) {
     $details = getQuizDetailsFormFill($qid);
 
@@ -126,15 +104,15 @@ function getQuizDetailsForm($qid) {
                 <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" value="' . $details["title"] . '" required>
 
                 <label for="quiz_time"><b>Estimated time to complete (minutes)</b></label>
-                <input type="number" min="0" step="1" name="quiz_time" value="' . $details["duration"] . '" required>
+                <input type="number" min="0" step="1" name="quiz_time" value="' . $_SESSION["m-quiz"]["old"]["duration"] . '" required>
 
                 <label>
-                    <input type="checkbox" name="is_visible" ' . ($details["visible"] == 1? 'checked' : '') . '>
+                    <input type="checkbox" name="is_visible" ' . ($_SESSION["m-quiz"]["old"]["visible"] == 1? 'checked' : '') . '>
                     <b>Visible to students?</b>
                 </label>
 
                 <label>
-                    <input type="checkbox" name="is_modifiable" ' . ($details["modifiable"] == 1? 'checked' : '') . '>
+                    <input type="checkbox" name="is_modifiable" ' . ($_SESSION["m-quiz"]["old"]["modifiable"] == 1? 'checked' : '') . '>
                     <b>Allow other staff members to modify?</b>
                 </label>
 
@@ -172,10 +150,69 @@ function modify_quiz_main() {
         echo getSelectTag($titles, "quiz-option", "Select a quiz to modify:", "modify_quiz.php");
     } elseif ($_SESSION["m-quiz-state"] == 0) {
         echo getQuizDetailsForm($_SESSION["m-quiz"]["id"]); // next or delete
+        for ($_SESSION["m-quiz"]["old"]["questions"] as $question) {
+            echo $question["title"] . "<br>";
+        }
     } else {
         // next or delete question
         // submit or new question
     }
+}
+
+
+
+
+
+function setOldQuizDetails($qid) {
+    require_once "config.php";
+
+    $sql = "SELECT title, duration, available, modifiable FROM quizzes WHERE id = " . strval($qid);
+    $_SESSION["m-quiz"]["old"] = [
+        "title" => "",
+        "duration" => 0,
+        "visible" => 0,
+        "modifiable" => 0
+    ];
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+            mysqli_stmt_bind_result(
+                $stmt, 
+                $_SESSION["m-quiz"]["old"]["title"], 
+                $_SESSION["m-quiz"]["old"]["duration"], 
+                $_SESSION["m-quiz"]["old"]["visible"], 
+                $_SESSION["m-quiz"]["old"]["modifiable"]
+            );
+            mysqli_stmt_fetch($stmt);
+        } else echo "An error occurred. Please try again later.";
+    } else echo "An error occurred. Please try again later.";
+    mysqli_stmt_close($stmt);
+
+    $sql = "SELECT id, text, a, b, c, d, answer FROM quiz_questions WHERE quiz_id = " . $_SESSION["m-quiz"]["id"];
+    $_SESSION["m-quiz"]["old"]["questions"] = [];
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+            while(mysqli_stmt_bind_result($stmt, $id, $text, $a, $b, $c, $d, $answer)) {
+                array_push($_SESSION["m-quiz"]["old"]["questions"], [
+                    "id" => $id,
+                    "text" => $text,
+                    "a" => $a,
+                    "b" => $b,
+                    "c" => $c,
+                    "d" => $d,
+                    "answer" => $answer,
+                    "deleted" => false
+                ]);
+            }
+            mysqli_stmt_fetch($stmt);
+        } else echo "An error occurred. Please try again later.";
+    } else echo "An error occurred. Please try again later.";
+    mysqli_stmt_close($stmt);
+
+    return $details;
 }
 
 // submit form
@@ -189,9 +226,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_SESSION["m-quiz-state"] == -1) {
         // get old details of quiz
         $_SESSION["m-quiz"]["id"] = $_POST["quiz-option"];
+        setOldQuizDetails($_SESSION["m-quiz"]["id"]);
+
         $_SESSION["m-quiz-state"]++;
     } elseif ($_SESSION["m-quiz-state"] == 0) {
         // get new details of quiz
+        $_SESSION["m-quiz"]["new"] = [
+            "title" => $_POST["quiz_title"],
+            "duration" => $_POST["quiz_time"],
+            "available" => isset($_POST["is_visible"]) ? 1 : 0,
+            "modifiable" => isset($_POST["is_modifiable"]) ? 1 : 0,
+            "current question" => 1
+        ]
+
         $_SESSION["m-quiz-state"]++;
     } else {
         // get new details of question
