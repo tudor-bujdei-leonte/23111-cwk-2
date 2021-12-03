@@ -376,20 +376,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         if ($_POST["submitted"] == "delete") {
-            array_push($_SESSION["m-quiz"]["new"]["questions"], [
-                "id" => ($_SESSION["m-quiz"]["new"]["current question"] > 
-                    count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
-                    $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"], // could be newly added
-                "deleted" => true
-            ]);
+            // if before last question, save q and go to next
+            if ($_SESSION["m-quiz"]["new"]["current question"] < 
+                count($_SESSION["m-quiz"]["old"]["questions"])) {
+                array_push($_SESSION["m-quiz"]["new"]["questions"], [
+                    "id" =>  $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"], // could be newly added
+                    "deleted" => true
+                ]);
+                $_SESSION["m-quiz"]["new"]["current question"]++;
             // if new question, save quiz
-            if ($_SESSION["m-quiz"]["new"]["current question"] > 
+            } elseif ($_SESSION["m-quiz"]["new"]["current question"] > 
             count($_SESSION["m-quiz"]["old"]["questions"])) {
+                $_SESSION["m-quiz-state"] = -1;
+                saveActiveQuiz();
+            // if last question, save q and save quiz
+            } else {
+                array_push($_SESSION["m-quiz"]["new"]["questions"], [
+                    "id" =>  $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"], // could be newly added
+                    "deleted" => true
+                ]);
                 $_SESSION["m-quiz-state"] = -1;
                 saveActiveQuiz();
             }
             // else, next question
-            $_SESSION["m-quiz"]["new"]["current question"]++;
         } elseif ($_POST["submitted"] == "next" || $_POST["submitted"] == "new" || $_POST["submitted"] == "save") {
             if (empty($_POST["ans" . $_POST["anscorrect"]])) {
                 header("location: modify_quiz.php?Message=" . urlencode("The correct answer must be one of the possible answers."));
