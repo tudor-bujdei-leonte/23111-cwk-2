@@ -269,11 +269,18 @@ function deleteActiveQuiz() {
 
     if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_execute($stmt)) {
+            // correct quiz_deletion log
+            mysqli_stmt_close($stmt);
+            $sql = "UPDATE quiz_deletions SET uid = " . $_SESSION["uid"] . " WHERE quiz_d = " . $_SESSION["m-quiz"]["id"];
+            $stmt = mysqli_prepare($link, $sql);
+            mysqli_stmt_execute($stmt);
+
             header("location: index.php?Message=" . urlencode("Successfully deleted quiz."));
             exit;
         } else echo "An error occurred. Please try again later.";
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
+
 }
 
 // submit form
