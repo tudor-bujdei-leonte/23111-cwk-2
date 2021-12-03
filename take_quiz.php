@@ -98,7 +98,7 @@ function chooseQuizMenu() {
 
 function answerQuestionMenu() {
     // pop question
-    $question = array_pop($_SESSION["t-quiz"]["questions"])
+    $question = array_pop($_SESSION["t-quiz"]["questions"]);
     $_SESSION["t-quiz"]["answer to current question"] = $question["answer"];
     $submit_button = count($_SESSION["t-quiz"]["questions"]) == 0 ?
         '<button type="submit" name="submitted" value="save">Submit attempt</button>' :
