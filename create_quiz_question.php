@@ -103,11 +103,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($quiz_id = mysqli_stmt_execute($stmt)) {
                     // great! But I don't even know if the opposite returns 0, null, -1, nullptr, or something else.
                 } else { 
-                    echo "Something went wrong. Please try again later.";
+                    echo "Something went wrong. Please try again later. Code: 1";
                     $success = false;
                 }
             } else { 
-                echo "Something went wrong. Please try again later.";
+                echo "Something went wrong. Please try again later. Code: 2";
                 $success = false;
             }
             mysqli_stmt_close($stmt);
@@ -130,11 +130,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (mysqli_stmt_execute($stmt)) {
                         // cool! keep it up!
                     } else { 
-                        echo "Something went wrong. Please try again later.";
+                        echo "Something went wrong. Please try again later. Code: 3";
                         $success = false;
                     }
                 } else { 
-                    echo "Something went wrong. Please try again later.";
+                    echo "Something went wrong. Please try again later. Code: 4";
                     $success = false;
                 }
                 mysqli_stmt_close($stmt);
