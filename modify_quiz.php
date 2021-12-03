@@ -150,7 +150,7 @@ function getQuestionDetailsForm($question) {
         <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to correct answer" name="anscorrect" value="' . $question["answer"] . '" required>
 
         <button type="submit" name="submitted" value="next">Next</button>
-' . (count($_SESSION["m-quiz"]["old"]["questions"])-1 > $_SESSION["m-quiz"]["new"]["current question"] ? 
+' . (count($_SESSION["m-quiz"]["old"]["questions"]) > $_SESSION["m-quiz"]["new"]["current question"] ? 
     '<button type="submit" name="submitted" value="next">Next question</button>' :
     '<button type="submit" name="submitted" value="save">Save changes</button>' . 
     '<button type="submit" name="submitted" value="save">New question</button>') .
