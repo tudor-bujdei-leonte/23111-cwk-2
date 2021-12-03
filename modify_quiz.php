@@ -138,9 +138,9 @@ function getQuizDetailsForm($qid) {
                     <b>Allow other staff members to modify?</b>
                 </label>
 
-                <button type="submit" value="next">Edit questions</button>
-                <button type="submit" value="delete">Delete quiz</button>
-                <button type="submit" value="cancel">Cancel</button>
+                <button type="submit" name="submitted" value="next">Edit questions</button>
+                <button type="submit" name="submitted" value="delete">Delete quiz</button>
+                <button type="submit" name="submitted" value="cancel">Cancel</button>
 
             </div>
         </form>';
@@ -180,6 +180,12 @@ function modify_quiz_main() {
 
 // submit form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_POST["submitted"] == "cancel") {
+        $_SESSION["m-quiz-state"] = -1;
+        header("location: index.php?Message=" . urlencode("Canceled operation."));
+        exit;
+    }
+
     if ($_SESSION["m-quiz-state"] == -1) {
         // get old details of quiz
         $_SESSION["m-quiz"]["id"] = $_POST["quiz-option"];
