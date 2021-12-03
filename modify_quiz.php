@@ -317,7 +317,7 @@ function saveActiveQuiz() {
             $d = empty($question["d"]) ? "NULL" : "'" . $question["d"] . "'";
             $answer = "'" . $question["answer"] . "'";
 
-            if ($id == -1) {
+            if ($qid == -1) {
                 $sql .= "INSERT INTO quiz_questions
                 SET quiz_id = $qid
                     text = $text,
