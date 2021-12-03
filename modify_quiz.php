@@ -78,12 +78,12 @@ function getModifiableQuizzes($uid) {
 
 function getSelectTag($lines, $name, $title) {
     $s = '<div class="container">\n';
-    $s += '<label for="' . $name . '"><b>' . $title . '</b></label>\n';
-    $s += '<select name="' . $name . '">\n';
+    $s .= '<label for="' . $name . '"><b>' . $title . '</b></label>\n';
+    $s .= '<select name="' . $name . '">\n';
     foreach ($lines as $line) {
-        $s += '<option value="' . $line . '">' . $line . '</option>\n';
+        $s .= '<option value="' . $line . '">' . $line . '</option>\n';
     }
-    $s += '</select>';
+    $s .= '</select>';
     return s;
 }
 
