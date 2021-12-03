@@ -195,17 +195,19 @@ function setOldQuizDetails($qid) {
     if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_store_result($stmt);
-            while(mysqli_stmt_bind_result($stmt, $id, $text, $a, $b, $c, $d, $answer)) {
-                array_push($_SESSION["m-quiz"]["old"]["questions"], [
-                    "id" => $id,
-                    "text" => $text,
-                    "a" => $a,
-                    "b" => $b,
-                    "c" => $c,
-                    "d" => $d,
-                    "answer" => $answer,
-                    "deleted" => false
-                ]);
+            if (mysqli_stmt_bind_result($stmt, $id, $text, $a, $b, $c, $d, $answer)) {
+                while (mysqsli_stmt_fetch($stmt)) {
+                    array_push($_SESSION["m-quiz"]["old"]["questions"], [
+                        "id" => $id,
+                        "text" => $text,
+                        "a" => $a,
+                        "b" => $b,
+                        "c" => $c,
+                        "d" => $d,
+                        "answer" => $answer,
+                        "deleted" => false
+                    ]);
+                }
             }
             mysqli_stmt_fetch($stmt);
         } else echo "An error occurred. Please try again later.";
