@@ -58,6 +58,8 @@ if(!isset($_SESSION["quiz"]) || $_SESSION["quiz"]["num questions"] === 0){
     exit;
 }
 
+require_once "config.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # preamble for question
     # field checking is already performed in the HTML
