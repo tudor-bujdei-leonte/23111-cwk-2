@@ -141,15 +141,19 @@ function printResultsMenu() {
 function mainTakeQuiz() {
     if (!isset($_SESSION["t-quiz-state"])) {
         $_SESSION["t-quiz-state"] = -1;
-    }
-
-    if ($_SESSION["t-quiz-state"] == -1) {
         $_SESSION["t-quiz"] = [
             "id" => -1,
+            "title" => "",
+            "duration" => 0,
+            "visible" => 0,
+            "modifiable" => 0,
             "questions" => [],
             "correct answers" => 0,
             "answers" => 0
         ];
+    }
+
+    if ($_SESSION["t-quiz-state"] == -1) {
         // choose quiz
         echo chooseQuizMenu();
     } elseif ($_SESSION["t-quiz-state"] == 0) {
@@ -174,7 +178,10 @@ function setQuizDetails($qid) {
         "title" => "",
         "duration" => 0,
         "visible" => 0,
-        "modifiable" => 0
+        "modifiable" => 0,
+        "questions" => [],
+        "correct answers" => 0,
+        "answers" => 0
     ];
 
     if ($stmt = mysqli_prepare($link, $sql)) {
