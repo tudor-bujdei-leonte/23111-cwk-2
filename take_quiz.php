@@ -170,6 +170,7 @@ function setQuizDetails($qid) {
     require_once "config.php";
     $sql = "SELECT title, duration, available, modifiable FROM quizzes WHERE id = " . strval($qid);
     $_SESSION["t-quiz"] = [
+        "id" = $qid,
         "title" => "",
         "duration" => 0,
         "visible" => 0,
@@ -191,7 +192,7 @@ function setQuizDetails($qid) {
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
 
-    $sql = "SELECT id, text, a, b, c, d, answer FROM quiz_questions WHERE quiz_id = " . $_SESSION["m-quiz"]["id"];
+    $sql = "SELECT id, text, a, b, c, d, answer FROM quiz_questions WHERE quiz_id = " . $_SESSION["t-quiz"]["id"];
     $_SESSION["t-quiz"]["questions"] = [];
 
     if ($stmt = mysqli_prepare($link, $sql)) {
