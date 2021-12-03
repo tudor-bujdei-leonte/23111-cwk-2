@@ -319,7 +319,7 @@ function saveActiveQuiz() {
 
             if ($qid == -1) {
                 $sql .= "INSERT INTO quiz_questions
-                SET quiz_id = $id
+                SET quiz_id = $id,
                     text = $text,
                     a = $a,
                     b = $b,
