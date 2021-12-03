@@ -95,8 +95,6 @@ function getSelectTag($lines, $name, $title, $post) {
 }
 
 function getQuizDetailsForm($qid) {
-    $details = getQuizDetailsFormFill($qid);
-
     $s = '<form action="modify_quiz.php" method="post">
             <div class="container">
 
