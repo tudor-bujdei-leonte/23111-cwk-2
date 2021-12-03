@@ -117,7 +117,7 @@ function answerQuestionMenu() {
                 <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to answer" name="answer" required>
         
                 ' . $submit_button . '
-        
+                <button type="submit" name="cancel" value="next">Quit</button>
             </div>
         </form>
             ';
@@ -248,7 +248,7 @@ function getAnswerQuiz() {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["submitted"]) && $_POST["submitted"] == "cancel") {
         $_SESSION["t-quiz-state"] = -1;
-        header("location: index.php?Message=" . urlencode("Canceled operation."));
+        header("location: index.php?Message=" . urlencode("Canceled quiz."));
         exit;
     } elseif (isset($_POST["submitted"]) && $_POST["submitted"] == "return") {
         $_SESSION["t-quiz-state"] = -1;
