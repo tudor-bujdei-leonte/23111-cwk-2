@@ -104,7 +104,7 @@ function answerQuestionMenu() {
         '<button type="submit" name="submitted" value="save">Submit attempt</button>' :
         '<button type="submit" name="submitted" value="next">Next question</button>';
     return '
-        <form action="modify_quiz.php" method="post">
+        <form action="take_quiz.php" method="post">
             <div class="container">
                 <label><h2>' . $question["text"] . '</h2></label>
         
