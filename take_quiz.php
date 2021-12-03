@@ -125,7 +125,7 @@ function answerQuestionMenu() {
 
 function printResultsMenu() {
     return '
-    <form>
+    <form action="take_quiz.php" method="post">
     <div class="container">
     <label><h1>' . $_SESSION["t-quiz"]["title"] . '</h1></label>
 
