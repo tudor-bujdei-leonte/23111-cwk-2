@@ -56,13 +56,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_
 
 function getModifiableQuizzes($uid) {
     require_once "config.php";
-    
+
     $titles = [];
 
     $sql = "SELECT title FROM quizzes WHERE author_uid = ? OR modifiable = 1"; // duplicate names are allowed but impossible to recover
 
     if ($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_params($stmt, "s", $uid);
+        mysqli_stmt_bind_param($stmt, "s", $uid);
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_store_result($stmt);
             mysqli_stmt_bind_result($stmt, $title);
