@@ -50,7 +50,7 @@ function generateMenu($items) {
 }
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_SESSION["is_staff"]) || $_SESSION["is_staff"] === false){
-    header("location: index.php?Message=" . urlencode("Only staff members can create a quiz."));
+    header("location: index.php?Message=" . urlencode("Only staff members can modify a quiz."));
     exit;
 }
 
@@ -75,6 +75,18 @@ function getModifiableQuizzes($uid) {
 
     return $titles;
 }
+
+function getSelectTag($lines, $name, $title) {
+    $s = '<div class="container">\n';
+    $s += '<label for="' . $name . '"><b>' . $title . '</b></label>\n';
+    $s += '<select name="' . $name . '">\n';
+    foreach ($lines as $line) {
+        $s += '<option value="' . $line . '">' . $line . '</option>\n';
+    }
+    $s += '</select>';
+    return s;
+}
+
 ?>
 
 <!doctype html>
@@ -92,9 +104,10 @@ function getModifiableQuizzes($uid) {
         echo generateMenu($menu);
 
         $titles = getModifiableQuizzes($_SESSION["uid"]);
-        foreach($titles as $title) {
-            echo $title . "\n";
-        }
+        // foreach($titles as $title) {
+        //     echo $title . "\n";
+        // }
+        echo getSelectTag($titles, "quiz-option", "Select a quiz to modify");
         ?>
 
     </body>
