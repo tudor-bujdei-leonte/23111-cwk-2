@@ -280,7 +280,66 @@ function deleteActiveQuiz() {
         } else echo "An error occurred. Please try again later.";
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
+}
 
+function saveActiveQuiz() {
+    $id = $_SESSION["m-quiz"]["id"]
+    $title = $_SESSION["m-quiz"]["new"]["title"]
+    $duration = $_SESSION["m-quiz"]["new"]["duration"];
+    $available = $_SESSION["m-quiz"]["new"]["available"];
+    $modifiable = $_SESSION["m-quiz"]["new"]["modifiable"];
+    $questions = $_SESSION["m-quiz"]["new"]["questions"];
+
+    require_once "config.php";
+
+    $sql = "UPDATE quizzes 
+        SET title = \"$title\", 
+            duration = $duration, 
+            available = $available, 
+            modifiable = $modifiable
+        WHERE id = $id;
+        ";
+    
+    foreach ($questions as $question) {
+        $id = $question["id"];
+
+        if ($question["deleted"] && $id != -1) {
+            $sql .= "DELETE FROM quiz_questions
+                WHERE id = $id;
+            ";
+        } else {
+            $text = $question["text"];
+            $a = $question[""];;
+            $b = $question[""];
+            $c = $question[""];
+            $d =$question[""];
+            $answer = $question[""];
+
+            if ($id == -1) {
+                $sql .= "INSERT INTO quiz_questions
+                SET text = $text,
+                    a = $a,
+                    b = $b,
+                    c = $c,
+                    d = $d,
+                    answer = $answer;
+                "
+            } else {
+                $sql .= "UPDATE quiz_questions
+                SET text = $text,
+                    a = $a,
+                    b = $b,
+                    c = $c,
+                    d = $d,
+                    answer = $answer
+                WHERE id = $id;
+            ";
+            }
+        }
+    }
+    
+    header("location: index.php?Message=" . urlencode($sql));
+    exit;
 }
 
 // submit form
@@ -317,7 +376,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         if ($_POST["submitted"] == "delete") {
-            // delete current question
             array_push($_SESSION["m-quiz"]["new"]["questions"] . [
                 "id" => ($_SESSION["m-quiz"]["new"]["current question"] > 
                     count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
@@ -325,10 +383,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "deleted" => true
             ]);
             // if new question, save quiz
+            if ($_SESSION["m-quiz"]["new"]["current question"] > 
+            count($_SESSION["m-quiz"]["old"]["questions"])) {
+                $_SESSION["m-quiz-state"] = -1;
+                saveActiveQuiz();
+            }
             // else, next question
         } elseif ($_POST["submitted"] == "save") {
             // submit form
             $_SESSION["m-quiz-state"] = -1;
+            saveActiveQuiz();
         } elseif ($_POST["submitted"] == "next" || $_POST["submitted"] == "new") {
             if (empty($_POST["ans" . $_POST["anscorrect"]])) {
                 header("location: modify_quiz.php?Message=" . urlencode("The correct answer must be one of the possible answers."));
