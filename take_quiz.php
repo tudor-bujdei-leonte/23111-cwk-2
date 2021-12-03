@@ -117,7 +117,7 @@ function answerQuestionMenu() {
                 <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to answer" name="answer" required>
         
                 ' . $submit_button . '
-                <button type="submit" name="cancel" value="next">Quit</button>
+                <button type="submit" name="submitted" value="cancel">Quit</button>
             </div>
         </form>
             ';
