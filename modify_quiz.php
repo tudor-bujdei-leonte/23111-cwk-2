@@ -196,7 +196,7 @@ function setOldQuizDetails($qid) {
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_store_result($stmt);
             if (mysqli_stmt_bind_result($stmt, $id, $text, $a, $b, $c, $d, $answer)) {
-                while (mysqsli_stmt_fetch($stmt)) {
+                while (mysqli_stmt_fetch($stmt)) {
                     array_push($_SESSION["m-quiz"]["old"]["questions"], [
                         "id" => $id,
                         "text" => $text,
