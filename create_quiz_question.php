@@ -96,8 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["quiz"]["author"], 
                     $_SESSION["quiz"]["name"], 
                     $_SESSION["quiz"]["duration"], 
-                    $_SESSION["quiz"]["available"] ? 1 : 0,
-                    $_SESSION["quiz"]["non-author modifiable"] ? 1 : 0
+                    $_SESSION["quiz"]["available"],
+                    $_SESSION["quiz"]["non-author modifiable"]
                 );
 
                 if (mysqli_stmt_execute($stmt)) {

@@ -56,12 +56,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_
 
 # reset current quiz session
 $_SESSION["quiz"] = [
-    "author" => $_SESSION["uid"],
-    "deleted" => false,
-    "available" => false,
+    "author" => $_SESSION["uid"]
+    "available" => 0,
     "name" => "Quiz",
     "duration" => 0,
-    "non-author modifiable" => false,
+    "non-author modifiable" => 0,
     "num questions" => 0,
     "questions" => [],
 ];
@@ -71,10 +70,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     # field checking is already performed in the HTML
 
     # update session quiz details
-    $_SESSION["quiz"]["available"] = isset($_POST["is_visible"]);
+    $_SESSION["quiz"]["available"] = isset($_POST["is_visible"]) ? 1 : 0;
     $_SESSION["quiz"]["name"] = $_POST["quiz_title"];
     $_SESSION["quiz"]["duration"] = $_POST["quiz_time"];
-    $_SESSION["quiz"]["non-author modifiable"] = isset($_POST["is_modifiable"]);
+    $_SESSION["quiz"]["non-author modifiable"] = isset($_POST["is_modifiable"]) ? 1 : 0;
     $_SESSION["quiz"]["num questions"] = $_POST["num_questions"];
 
     # prompt for questions
