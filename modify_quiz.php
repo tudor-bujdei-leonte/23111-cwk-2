@@ -101,14 +101,14 @@ function getQuizDetailsFormFill($qid) {
     $details = [
         "title" => "",
         "duration" => 0,
-        "available" => 0,
+        "visible" => 0,
         "modifiable" => 0
     ];
 
     if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_store_result($stmt);
-            mysqli_stmt_bind_result($stmt, $details["title"], $details["duration"], $details["available"], $details["modifiable"]);
+            mysqli_stmt_bind_result($stmt, $details["title"], $details["duration"], $details["visible"], $details["modifiable"]);
             mysqli_stmt_fetch($stmt);
         } else echo "An error occurred. Please try again later.";
     } else echo "An error occurred. Please try again later.";
@@ -123,10 +123,10 @@ function getQuizDetailsForm($qid) {
             <div class="container">
 
                 <label for="quiz_title"><b>Quiz title</b></label>
-                <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" value="' . $details["name"] . '" required>
+                <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" value="' . $details["title"] . '" required>
 
                 <label for="quiz_time"><b>Estimated time to complete (minutes)</b></label>
-                <input type="number" min="0" step="1" name="quiz_time" value="' . $details["time"] . '" required>
+                <input type="number" min="0" step="1" name="quiz_time" value="' . $details["duration"] . '" required>
 
                 <label>
                     <input type="checkbox" name="is_visible" ' . ($details["visible"] == 1? 'checked' : '') . '>
