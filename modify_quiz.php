@@ -67,11 +67,13 @@ function getModifiableQuizzes($uid) {
             mysqli_stmt_store_result($stmt);
             mysqli_stmt_bind_result($stmt, $title);
             while (mysqli_stmt_fetch($stmt)) {
-                $titles += $title;
+                array_push($titles, $title);
             }
         } else echo "An error occurred. Please try again later.";
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
+
+    return $titles;
 }
 ?>
 
