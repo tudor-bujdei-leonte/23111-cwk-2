@@ -73,7 +73,7 @@ function displayTakenQuizzes() {
             ON quiz_attempts.quiz_id = quizzes.id
             WHERE quiz_attempts.uid = \'' . $_SESSION["uid"] . "'";
     
-    $result = ""
+    $result = "";
 
     if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_execute($stmt)) {
