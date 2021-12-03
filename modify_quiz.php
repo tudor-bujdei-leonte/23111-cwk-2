@@ -323,7 +323,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // if delete last question, complicated
 
         // then reset/increment m-quiz-state
-        $_SESSION["m-quiz-state"] = 0;
+        $_SESSION["m-quiz-state"]++;
     }
 }
 
