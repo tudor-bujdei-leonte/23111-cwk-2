@@ -141,15 +141,15 @@ function printResultsMenu() {
 function mainTakeQuiz() {
     if (!isset($_SESSION["t-quiz-state"])) {
         $_SESSION["t-quiz-state"] = -1;
+    }
+
+    if ($_SESSION["t-quiz-state"] == -1) {
         $_SESSION["t-quiz"] = [
             "id" => -1,
             "questions" => [],
             "correct answers" => 0,
             "answers" => 0
         ];
-    }
-
-    if ($_SESSION["t-quiz-state"] == -1) {
         // choose quiz
         echo chooseQuizMenu();
     } elseif ($_SESSION["t-quiz-state"] == 0) {
