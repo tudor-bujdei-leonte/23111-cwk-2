@@ -83,17 +83,17 @@ function generateMenu($items) {
             echo "<p>You are not logged in.</p>";
         }
 
-        if (isset($_SESSION["quiz"])) {
-            echo strval(count($_SESSION["quiz"]["questions"])) . "/" . strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
-            foreach ($_SESSION["quiz"]["questions"] as $question) {
-                echo "Question text: " . $question["text"] . "<br>";
-                echo "Answer a: " . $question["a"] . "<br>";
-                echo "Answer b: " . $question["b"] . "<br>";
-                echo "Answer c: " . $question["c"] . "<br>";
-                echo "Answer d: " . $question["d"] . "<br>";
-                echo "Correct answer: " . $question["answer"] . "<br>";
-            }
-        }
+        // if (isset($_SESSION["quiz"])) {
+        //     echo strval(count($_SESSION["quiz"]["questions"])) . "/" . strval($_SESSION["quiz"]["num questions"]) . " questions:<br>";
+        //     foreach ($_SESSION["quiz"]["questions"] as $question) {
+        //         echo "Question text: " . $question["text"] . "<br>";
+        //         echo "Answer a: " . $question["a"] . "<br>";
+        //         echo "Answer b: " . $question["b"] . "<br>";
+        //         echo "Answer c: " . $question["c"] . "<br>";
+        //         echo "Answer d: " . $question["d"] . "<br>";
+        //         echo "Correct answer: " . $question["answer"] . "<br>";
+        //     }
+        // }
         ?>
 
         <!-- <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> -->

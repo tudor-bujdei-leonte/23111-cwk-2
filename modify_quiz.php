@@ -54,31 +54,24 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_
     exit;
 }
 
-# reset current quiz session
-$_SESSION["quiz"] = [
-    "author" => $_SESSION["uid"],
-    "available" => 0,
-    "name" => "Quiz",
-    "duration" => 0,
-    "non-author modifiable" => 0,
-    "num questions" => 0,
-    "questions" => [],
-];
+require_once "config.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    # preamble for quiz
-    # field checking is already performed in the HTML
+function getModifiableQuizzes($uid) {
+    $titles = [];
 
-    # update session quiz details
-    $_SESSION["quiz"]["available"] = isset($_POST["is_visible"]) ? 1 : 0;
-    $_SESSION["quiz"]["name"] = $_POST["quiz_title"];
-    $_SESSION["quiz"]["duration"] = $_POST["quiz_time"];
-    $_SESSION["quiz"]["non-author modifiable"] = isset($_POST["is_modifiable"]) ? 1 : 0;
-    $_SESSION["quiz"]["num questions"] = $_POST["num_questions"];
+    $sql = "SELECT title FROM quizzes WHERE author_uid = ? OR modifiable = 1"; // duplicate names are allowed but impossible to recover
 
-    # prompt for questions
-    header("location: create_quiz_question.php");
-    exit;
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        mysqli_stmt_bind_params($stmt, "s", $uid);
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+            mysqli_stmt_bind_result($stmt, $title);
+            while (mysqli_stmt_fetch($stmt)) {
+                $titles += $title
+            }
+        } else echo "An error occurred. Please try again later.";
+    } else echo "An error occurred. Please try again later.";
+    mysqli_stmt_close($stmt);
 }
 ?>
 
@@ -94,35 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<p>' . $_GET['Message'] . '</p>';
         }
 
-        echo GenerateMenu($menu);
+        echo generateMenu($menu);
+
+        echo getModifiableQuizzes($_SESSION["uid"]);
         ?>
-
-        <form action="create_quiz.php" method="post">
-            <div class="container">
-
-                <label for="quiz_title"><b>Quiz title</b></label>
-                <input type="text" pattern=".*\S+.*" placeholder="Enter quiz title" name="quiz_title" required>
-
-                <label for="num_questions"><b>Number of questions</b></label>
-                <input type="number" min="1" step="1" pattern=".*\S+.*" name="num_questions" required>
-
-                <label for="quiz_time"><b>Estimated time to complete (minutes)</b></label>
-                <input type="number" min="0" step="1" name="quiz_time" required>
-
-                <label>
-                    <input type="checkbox" name="is_visible" checked>
-                    <b>Visible to students?</b>
-                </label>
-
-                <label>
-                    <input type="checkbox" name="is_modifiable">
-                    <b>Allow other staff members to modify?</b>
-                </label>
-
-                <button type="submit">Next</button>
-
-            </div>
-        </form>
 
     </body>
 </html>
