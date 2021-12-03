@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if (mysqli_stmt_execute($stmt)) {
                     $result = mysqli_stmt_get_result($stmt);
-                    print "$result \n";
+                    print "Result is $result \n";
                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                         foreach ($row as $r) {
                             print "$r ";
@@ -200,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" placeholder="Enter answer" name="ansb">
 
                 <label for="ansc"><b>Answer c</b></label>
-                <input type="text" placeholder="Enter answer" name="andc">
+                <input type="text" placeholder="Enter answer" name="ansc">
 
                 <label for="ansd"><b>Answer d</b></label>
                 <input type="text" placeholder="Enter answer" name="ansd">
