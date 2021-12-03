@@ -335,7 +335,7 @@ function saveActiveQuiz() {
                     c = $c,
                     d = $d,
                     answer = $answer
-                WHERE id = $id;
+                WHERE id = $qid;
             ";
             }
         }
