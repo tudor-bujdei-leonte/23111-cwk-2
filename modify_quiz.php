@@ -347,7 +347,7 @@ function saveActiveQuiz() {
             exit;
         } else echo "Error. Please try again later.";
     } else echo "Error. Please try again later.";
-    echo "<br>"
+    echo "<br>";
     echo $sql;
     echo "<br>";
     echo mysqli_error($link);
