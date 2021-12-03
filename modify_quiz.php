@@ -180,7 +180,7 @@ function modify_quiz_main() {
 
 // submit form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST["submitted"] == "cancel") {
+    if (isset($_POST["submitted"]) && $_POST["submitted"] == "cancel") {
         $_SESSION["m-quiz-state"] = -1;
         header("location: index.php?Message=" . urlencode("Canceled operation."));
         exit;
