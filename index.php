@@ -67,11 +67,11 @@ function displayTakenQuizzes() {
     if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true))
         return "<p>Log in to see your attempt history.</p>";
 
-    $sql = "SELECT quizzes.title, quiz_attempts.score
+    $sql = 'SELECT quizzes.title, quiz_attempts.score
             FROM quiz_attempts
             INNER JOIN quizzes
             ON quiz_attempts.quiz_id = quizzes.id
-            WHERE quiz_attempts.uid = '" . $_SESSION["uid"] "'";
+            WHERE quiz_attempts.uid = \'' . $_SESSION["uid"] . "'";
     
     $result = ""
 
