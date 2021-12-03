@@ -347,11 +347,11 @@ function saveActiveQuiz() {
             exit;
         } else echo "Error. Please try again later.";
     } else echo "Error. Please try again later.";
+    echo "<br>"
     echo $sql;
+    echo "<br>";
+    echo mysqli_error($link);
     mysqli_stmt_close($stmt);
-    
-    header("location: index.php?Message=" . urlencode($sql));
-    exit;
 }
 
 // submit form
