@@ -100,8 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["quiz"]["non-author modifiable"]
                 );
 
-                if ($quiz_id = mysqli_stmt_get_result($stmt)) {
-                    while ($row = mysqli_fetch_array($quiz_id, MYSQLI_NUM)) {
+                if (mysqli_stmt_execute($stmt)) {
+                    $res = mysqli_get_result($stmt);
+                    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                         foreach ($row as $r) {
                             print "$r ";
                         }
