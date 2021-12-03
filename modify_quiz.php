@@ -149,11 +149,10 @@ function getQuestionDetailsForm($question) {
         <label for="uid"><b>Correct answer:</b></label>
         <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to correct answer" name="anscorrect" value="' . $question["answer"] . '" required>
 
-        <button type="submit" name="submitted" value="next">Next</button>
 ' . (count($_SESSION["m-quiz"]["old"]["questions"]) > $_SESSION["m-quiz"]["new"]["current question"] ? 
     '<button type="submit" name="submitted" value="next">Next question</button>' :
     '<button type="submit" name="submitted" value="save">Save changes</button>' . 
-    '<button type="submit" name="submitted" value="save">New question</button>') .
+    '<button type="submit" name="submitted" value="new">New question</button>') .
 '        <button type="submit" name="submitted" value="delete">Delete this question</button>
         <button type="submit" name="submitted" value="cancel">Cancel</button>
 
@@ -303,7 +302,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["m-quiz-state"] = -1;
             deleteActiveQuiz();
         } else {
-
             // get new details of quiz
             $_SESSION["m-quiz"]["new"] = [
                 "title" => $_POST["quiz_title"],
@@ -317,13 +315,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["m-quiz-state"]++;
         }
     } else {
-        // get new details of question
+        if ($_POST["submitted"] == "delete") {
+            // delete current question
+            array_push($_SESSION["m-quiz"]["new"]["questions"] . [
+                "id" => ($_SESSION["m-quiz"]["new"]["current question"] > 
+                    count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
+                    $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"], // could be newly added
+                "deleted" => true
+            ])
+            // if new question, save quiz
+            // else, next question
+        } elseif ($_POST["submitted"] == "save") {
+            // submit form
+            $_SESSION["m-quiz-state"] = -1;
+        } elseif ($_POST["submitted"] == "next" || $_POST["submitted"] == "new") {
+            if (empty($_POST["ans" . $_POST["anscorrect"]])) {
+                header("location: modify_quiz.php?Message=" . urlencode("The correct answer must be one of the possible answers."));
+                exit;
+            }
 
-        // if at the last question, submit form
-        // if delete last question, complicated
+            // get new details of question
+            array_push($_SESSION["m-quiz"]["new"]["questions"], [
+                "id" => ($_SESSION["m-quiz"]["new"]["current question"] > 
+                count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
+                $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"],
+                "text" => $_POST["text"],
+                "a" => $_POST["ansa"],
+                "b" => $_POST["ansb"],
+                "c" => $_POST["ansc"],
+                "d" => $_POST["ansd"],
+                "answer" => $_POST["anscorrect"],
+                "deleted" => false
+            ]);
 
-        // then reset/increment m-quiz-state
-        $_SESSION["m-quiz"]["new"]["current question"]++;
+            // then reset/increment m-quiz-state
+            $_SESSION["m-quiz"]["new"]["current question"]++;
+        } else echo "Oops, this should not have happened!";
     }
 }
 
@@ -344,6 +371,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo generateMenu($menu);
 
         modify_quiz_main();
+
+        foreach ($_SESSION["m-quiz"]["new"]["questions"] as $question) {
+            echo "Question "
+        }
         ?>
 
     </body>
