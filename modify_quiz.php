@@ -237,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "available" => isset($_POST["is_visible"]) ? 1 : 0,
             "modifiable" => isset($_POST["is_modifiable"]) ? 1 : 0,
             "current question" => 1
-        ]
+        ];
 
         $_SESSION["m-quiz-state"]++;
     } else {
