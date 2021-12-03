@@ -88,7 +88,7 @@ function chooseQuizMenu() {
     $s .= '<label for="quiz-option"><b>Select quiz to take:</b></label>&nbsp&nbsp&nbsp';
     $s .= '<select name="quiz-option">';
     foreach ($lines as $line) {
-        $s .= '<option value="' . $line["id"] . '">' . $line["title"] . "(" . strval($line["duration"]) . ' min)</option>';
+        $s .= '<option value="' . $line["id"] . '">' . $line["title"] . " (" . strval($line["duration"]) . ' min)</option>';
     }
     $s .= '</select>';
     $s .= '<button type="submit">Take quiz</button>';
@@ -152,7 +152,7 @@ function mainTakeQuiz() {
     if ($_SESSION["t-quiz-state"] == -1) {
         // choose quiz
         echo chooseQuizMenu();
-    } elseif ($_SESSION["t-quiz-states"] == 0) {
+    } elseif ($_SESSION["t-quiz-state"] == 0) {
         // answer question
         echo answerQuestionMenu();
     } else {
