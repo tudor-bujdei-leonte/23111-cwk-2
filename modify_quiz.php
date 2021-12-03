@@ -339,7 +339,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "id" => ($_SESSION["m-quiz"]["new"]["current question"] > 
                 count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
                 $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"],
-                "text" => $_POST["text"],
+                "text" => $_POST["qtext"],
                 "a" => $_POST["ansa"],
                 "b" => $_POST["ansb"],
                 "c" => $_POST["ansc"],
