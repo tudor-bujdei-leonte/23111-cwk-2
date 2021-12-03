@@ -232,7 +232,7 @@ function getAnswerQuiz() {
         $uid = $_SESSION["uid"];
         $qid = $_SESSION["t-quiz"]["id"];
         $score = 1.0 * $_SESSION["t-quiz"]["correct answers"] / $_SESSION["t-quiz"]["answers"];
-        $sql = "INSERT INTO quiz_attempts SET uid = '$uid', quiz_id = $qid, score = $score, date = NOW";
+        $sql = "INSERT INTO quiz_attempts SET uid = '$uid', quiz_id = $qid, score = $score, date = NOW()";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             if (mysqli_stmt_execute($stmt)) {
