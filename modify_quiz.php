@@ -211,8 +211,6 @@ function setOldQuizDetails($qid) {
         } else echo "An error occurred. Please try again later.";
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
-
-    return $details;
 }
 
 // submit form
