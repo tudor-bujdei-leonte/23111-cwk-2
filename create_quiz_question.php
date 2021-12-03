@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 if ($stmt = mysqli_prepare($link, $sql)) {
                     mysqli_stmt_bind_param(
-                        $stmt, "issssss",
+                        $stmt, "ssssss",
                         $question["text"],
                         $question["a"],
                         $question["b"],
