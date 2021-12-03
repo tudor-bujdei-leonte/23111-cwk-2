@@ -84,7 +84,7 @@ function getSelectTag($lines, $name, $title) {
         $s .= '<option value="' . $line . '">' . $line . '</option>\n';
     }
     $s .= '</select>';
-    return s;
+    return $s;
 }
 
 ?>
