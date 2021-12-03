@@ -101,14 +101,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 );
 
                 if (mysqli_stmt_execute($stmt)) {
-                    $result = mysqli_stmt_get_result($stmt);
-                    print "Result is $result \n";
-                    while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-                        foreach ($row as $r) {
-                            print "$r ";
-                        }
-                        print "\n";
-                    }
                     // great! But I don't even know if the opposite returns 0, null, -1, nullptr, or something else.
                 } else { 
                     echo "Something went wrong. Please try again later. Code: 1";
@@ -121,12 +113,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_stmt_close($stmt);
 
             foreach ($_SESSION["quiz"]["questions"] as $question) {
-                $sql = "INSERT INTO quiz_questions SET quiz_id = ?, text = ?, a = ?, b = ?, c = ?, d = ?, answer = ?";
+                $sql = "INSERT INTO quiz_questions SET quiz_id = (SELECT MAX(id) FROM quizzes), text = ?, a = ?, b = ?, c = ?, d = ?, answer = ?";
                 
                 if ($stmt = mysqli_prepare($link, $sql)) {
                     mysqli_stmt_bind_param(
                         $stmt, "issssss",
-                        $quiz_id,
                         $question["text"],
                         $question["a"],
                         $question["b"],
