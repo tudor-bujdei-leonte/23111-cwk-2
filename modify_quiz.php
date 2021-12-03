@@ -323,7 +323,7 @@ function saveActiveQuiz() {
                     c = $c,
                     d = $d,
                     answer = $answer;
-                "
+                ";
             } else {
                 $sql .= "UPDATE quiz_questions
                 SET text = $text,
