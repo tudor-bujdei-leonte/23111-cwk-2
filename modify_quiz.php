@@ -124,7 +124,43 @@ function getQuizDetailsForm($qid) {
     return $s;
 }
 
-// function get
+function getQuestionDetailsForm($question) {
+    return '
+<form action="modify_quiz.php" method="post">
+    <div class="container">
+
+        <label><h3>Question ' . strval($_SESSION["m-quiz"]["new"]["current question"] - $_SESSION["m-quiz"]["new"]["deleted questions"]) . '</h3></label>
+
+        <label for="qtext"><b>Question text</b></label>
+        <input type="text" pattern=".*\S+.*" placeholder="Enter question text" name="qtext" value="' . $question["text"] . '" required>
+
+        <label for="ansa"><b>Answer a</b></label>
+        <input type="text" placeholder="Enter answer" name="ansa" value="' . $question["a"] . '" required>
+
+        <label for="ansb"><b>Answer b</b></label>
+        <input type="text" placeholder="Enter answer" name="ansb" value="' . $question["b"] . '" >
+
+        <label for="ansc"><b>Answer c</b></label>
+        <input type="text" placeholder="Enter answer" name="ansc" value="' . $question["c"] . '" >
+
+        <label for="ansd"><b>Answer d</b></label>
+        <input type="text" placeholder="Enter answer" name="ansd" value="' . $question["d"] . '" >
+
+        <label for="uid"><b>Correct answer:</b></label>
+        <input type="text" pattern="^[a-d]$" placeholder="Enter letter corresponding to correct answer" name="anscorrect" value="' . $question["answer"] . '" required>
+
+        <button type="submit" name="submitted" value="next">Next</button>
+' . (count($_SESSION["m-quiz"]["old"]["questions"])-1 > $_SESSION["m-quiz"]["new"]["current question"] ? 
+    '<button type="submit" name="submitted" value="next">Next question</button>' :
+    '<button type="submit" name="submitted" value="save">Save changes</button>' . 
+    '<button type="submit" name="submitted" value="save">New question</button>') .
+'        <button type="submit" name="submitted" value="delete">Delete this question</button>
+        <button type="submit" name="submitted" value="cancel">Cancel</button>
+
+    </div>
+</form>
+    '
+}
 
 // fsm to figure out which part to execute
 // -1 - start form
@@ -148,10 +184,23 @@ function modify_quiz_main() {
         echo getSelectTag($titles, "quiz-option", "Select a quiz to modify:", "modify_quiz.php");
     } elseif ($_SESSION["m-quiz-state"] == 0) {
         echo getQuizDetailsForm($_SESSION["m-quiz"]["id"]); // next or delete
-        foreach ($_SESSION["m-quiz"]["old"]["questions"] as $question) {
-            echo $question["text"] . "<br>";
-        }
+        // foreach ($_SESSION["m-quiz"]["old"]["questions"] as $question) {
+        //     echo $question["text"] . "<br>";
+        // }
     } else {
+        if (count($_SESSION["m-quiz"]["old"]["questions"]) < $_SESSION["m-quiz"]["new"]["current question"]) {
+            $question = [
+                "text" => "",
+                "a" => "",
+                "b" => "",
+                "c" => "",
+                "d" => "",
+                "answer" => ""
+            ];
+        } else {
+            $question = $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]
+        }
+        echo getQuestionDetailsForm($question);
         // next or delete question
         // submit or new question
     }
@@ -202,8 +251,8 @@ function setOldQuizDetails($qid) {
                         "b" => $b,
                         "c" => $c,
                         "d" => $d,
-                        "answer" => $answer,
-                        "deleted" => false
+                        "answer" => $answer
+                        // "deleted" => false
                     ]);
                 }
             }
@@ -234,7 +283,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "duration" => $_POST["quiz_time"],
             "available" => isset($_POST["is_visible"]) ? 1 : 0,
             "modifiable" => isset($_POST["is_modifiable"]) ? 1 : 0,
-            "current question" => 1
+            "current question" => 1,
+            "deleted questions" => 0
         ];
 
         $_SESSION["m-quiz-state"]++;
@@ -242,6 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // get new details of question
 
         // if at the last question, submit form
+        // if delete last question, complicated
 
         // then reset/increment m-quiz-state
         $_SESSION["m-quiz-state"] = 0;
