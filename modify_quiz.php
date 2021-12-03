@@ -80,7 +80,7 @@ function getSelectTag($lines, $name, $title, $post) {
     $s = '';
     $s .= '<form action="' . $post . '" method="post">';
     $s .= '<div class="container">';
-    $s .= '<label for="' . $name . '"><b>' . $title . '</b></label>;nbsp;nbsp;nbsp;nbsp';
+    $s .= '<label for="' . $name . '"><b>' . $title . '</b></label>&nbsp&nbsp&nbsp&nbsp';
     $s .= '<select name="' . $name . '">';
     foreach ($lines as $line) {
         $s .= '<option value="' . $line . '">' . $line . '</option>';
