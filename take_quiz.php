@@ -55,6 +55,7 @@ function generateMenu($items) {
 }
 
 function getAccessibleQuizzes() {
+    require_once "config.php";
     if ($_SESSION["is_staff"])
         $sql = "SELECT id, title, duration FROM quizzes WHERE available = 1 OR modifiable = 1 OR author_uid = '" . $_SESSION["uid"] . "'";
     else $sql = "SELECT id, title, duration FROM quizzes WHERE available = 1";
@@ -138,7 +139,6 @@ function printResultsMenu() {
 }
 
 function mainTakeQuiz() {
-    require_once "config.php";
     if (!isset($_SESSION["t-quiz-state"])) {
         $_SESSION["t-quiz-state"] = -1;
         $_SESSION["t-quiz"] = [
@@ -167,6 +167,7 @@ function mainTakeQuiz() {
 
 
 function setQuizDetails($qid) {
+    require_once "config.php";
     $sql = "SELECT title, duration, available, modifiable FROM quizzes WHERE id = " . strval($qid);
     $_SESSION["t-quiz"] = [
         "title" => "",
@@ -216,6 +217,7 @@ function setQuizDetails($qid) {
 }
 
 function getAnswerQuiz() {
+    require_once "config.php";
     if ($_POST["answer"] == $_SESSION["t-quiz"]["answer to current question"]) {
         $_SESSION["t-quiz"]["correct answers"]++; 
     }
