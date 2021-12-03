@@ -60,7 +60,7 @@ function getAccessibleQuizzes() {
         $sql = "SELECT id, title, duration FROM quizzes WHERE available = 1 OR modifiable = 1 OR author_uid = '" . $_SESSION["uid"] . "'";
     else $sql = "SELECT id, title, duration FROM quizzes WHERE available = 1";
 
-    $quizzes = []
+    $quizzes = [];
 
     if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_execute($stmt)) {
