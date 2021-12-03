@@ -61,6 +61,36 @@ function generateMenu($items) {
     return $html;
 }
 
+function displayTakenQuizzes() {
+    require_once "config.php";
+
+    if (!(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true))
+        return "<p>Log in to see your attempt history.</p>";
+
+    $sql = "SELECT quizzes.title, quiz_attempts.score
+            FROM quiz_attempts
+            INNER JOIN quizzes
+            ON quiz_attempts.quiz_id = quizzes.id
+            WHERE quiz_attempts.uid = '" . $_SESSION["uid"] "'";
+    
+    $result = ""
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_store_result($stmt);
+            if (mysqli_stmt_bind_result($stmt, $title, $score)) {
+                while (mysqli_stmt_fetch($stmt)) {
+                    result .= "<p>Quiz \"" . $title . "\" | Score " . strval($score * 100) . "%</p><br>"
+                }
+            }
+            mysqli_stmt_fetch($stmt);
+        } else echo "An error occurred. Please try again later.";
+    } else echo "An error occurred. Please try again later.";
+    mysqli_stmt_close($stmt);
+
+    return $result
+}
+
 ?>
 
 <!doctype html>
@@ -94,6 +124,8 @@ function generateMenu($items) {
         //         echo "Correct answer: " . $question["answer"] . "<br>";
         //     }
         // }
+
+        echo displayTakenQuizzes();
         ?>
 
         <!-- <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> -->
