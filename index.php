@@ -80,7 +80,7 @@ function displayTakenQuizzes() {
             mysqli_stmt_store_result($stmt);
             if (mysqli_stmt_bind_result($stmt, $title, $score)) {
                 while (mysqli_stmt_fetch($stmt)) {
-                    result .= "<p>Quiz \"" . $title . "\" | Score " . strval($score * 100) . "%</p><br>"
+                    result .= "<p>Quiz \"" . $title . "\" | Score " . strval($score * 100) . "%</p><br>";
                 }
             }
             mysqli_stmt_fetch($stmt);
@@ -88,7 +88,7 @@ function displayTakenQuizzes() {
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
 
-    return $result
+    return $result;
 }
 
 ?>
