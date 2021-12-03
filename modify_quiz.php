@@ -110,7 +110,7 @@ function getSelectTag($lines, $name, $title, $post) {
         // foreach($titles as $title) {
         //     echo $title . "\n";
         // }
-        echo getSelectTag($titles, "quiz-option", "Select a quiz to modify");
+        echo getSelectTag($titles, "quiz-option", "Select a quiz to modify", "modify_quiz.php");
         ?>
 
     </body>
