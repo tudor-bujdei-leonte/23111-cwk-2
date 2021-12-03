@@ -67,7 +67,7 @@ function getAccessibleQuizzes() {
             mysqli_stmt_store_result($stmt);
             mysqli_stmt_bind_result($stmt, $qid, $title, $duration);
             while (mysqli_stmt_fetch($stmt)) {
-                array_push($titles, [
+                array_push($quizzes, [
                     "title" => $title,
                     "id" => $qid,
                     "duration" => $duration
