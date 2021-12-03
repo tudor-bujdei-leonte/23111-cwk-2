@@ -144,7 +144,7 @@ function mainTakeQuiz() {
         $_SESSION["t-quiz"] = [
             "id" => -1,
             "questions" => [],
-            "correct answers" => 0
+            "correct answers" => 0,
             "answers" => 0
         ]
     }
