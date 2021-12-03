@@ -1,5 +1,4 @@
 <?php
-require_once "config.php";
 session_start();
 
 $menu = array(
@@ -139,6 +138,7 @@ function printResultsMenu() {
 }
 
 function mainTakeQuiz() {
+    require_once "config.php";
     if (!isset($_SESSION["t-quiz-state"])) {
         $_SESSION["t-quiz-state"] = -1;
         $_SESSION["t-quiz"] = [
