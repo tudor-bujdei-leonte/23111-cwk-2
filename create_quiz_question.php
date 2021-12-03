@@ -101,6 +101,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 );
 
                 if ($quiz_id = mysqli_stmt_execute($stmt)) {
+                    while ($row = mysqli_fetch_array($quiz_id, MYSQLI_NUM)) {
+                        foreach ($row as $r) {
+                            print "$r ";
+                        }
+                        print "\n";
+                    }
                     // great! But I don't even know if the opposite returns 0, null, -1, nullptr, or something else.
                 } else { 
                     echo "Something went wrong. Please try again later. Code: 1";
@@ -144,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($success) {
                 header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
                 exit;
-            }
+            } else {} // should remove the incomplete data
         }
     }
 }
