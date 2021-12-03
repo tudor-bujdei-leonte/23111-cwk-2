@@ -150,7 +150,7 @@ function modify_quiz_main() {
         echo getSelectTag($titles, "quiz-option", "Select a quiz to modify:", "modify_quiz.php");
     } elseif ($_SESSION["m-quiz-state"] == 0) {
         echo getQuizDetailsForm($_SESSION["m-quiz"]["id"]); // next or delete
-        for ($_SESSION["m-quiz"]["old"]["questions"] as $question) {
+        foreach ($_SESSION["m-quiz"]["old"]["questions"] as $question) {
             echo $question["title"] . "<br>";
         }
     } else {
