@@ -73,7 +73,7 @@ function displayTakenQuizzes() {
             ON quiz_attempts.quiz_id = quizzes.id
             WHERE quiz_attempts.uid = \'' . $_SESSION["uid"] . "'";
     
-    $result = "";
+    $result = "<p>Your quiz attempts:</p><br>";
 
     if ($stmt = mysqli_prepare($link, $sql)) {
         if (mysqli_stmt_execute($stmt)) {
@@ -88,7 +88,7 @@ function displayTakenQuizzes() {
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
 
-    if ($result == "") return "<p>You have not attempted any quiz.</p>";
+    if ($result == "<p>Your quiz attempts:</p><br>") return "<p>You have not attempted any quiz.</p>";
     return $result;
 }
 
