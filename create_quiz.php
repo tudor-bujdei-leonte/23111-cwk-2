@@ -56,7 +56,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] === false || !isset($_
 
 # reset current quiz session
 $_SESSION["quiz"] = [
-    "author" => $_SESSION["uid"]
+    "author" => $_SESSION["uid"],
     "available" => 0,
     "name" => "Quiz",
     "duration" => 0,
