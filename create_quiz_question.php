@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else echo "Something went wrong. Please try again later.";
             mysqli_stmt_close($stmt);
 
-            for ($_SESSION["quiz"]["questions"] as $question) {
+            foreach ($_SESSION["quiz"]["questions"] as $question) {
                 $sql = "INSERT INTO quiz_questions SET quiz_id = ?, text = ?, a = ?, b = ?, c = ?, d = ?, answer = ?";
                 
                 if ($stmt = mysqli_prepare($link, $sql)) {
