@@ -91,7 +91,10 @@ function getModifiableQuizzes($uid) {
 
         echo generateMenu($menu);
 
-        echo getModifiableQuizzes($_SESSION["uid"]);
+        $titles = getModifiableQuizzes($_SESSION["uid"]);
+        foreach($titles as $title) {
+            echo $title . "\n";
+        }
         ?>
 
     </body>
