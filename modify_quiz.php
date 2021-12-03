@@ -198,7 +198,7 @@ function modify_quiz_main() {
                 "answer" => ""
             ];
         } else {
-            $question = $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]
+            $question = $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1];
         }
         echo getQuestionDetailsForm($question);
         // next or delete question
