@@ -164,7 +164,7 @@ function getQuestionDetailsForm($question) {
 // fsm to figure out which part to execute
 // -1 - start form
 // 0 - change basic details of quiz
-// 1 <= i <= count of questions - change each question
+// 1 - change questions
 function modify_quiz_main() {
     if (!isset($_SESSION["m-quiz-state"])) {
         $_SESSION["m-quiz-state"] = -1;
@@ -376,7 +376,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         if ($_POST["submitted"] == "delete") {
-            array_push($_SESSION["m-quiz"]["new"]["questions"] . [
+            array_push($_SESSION["m-quiz"]["new"]["questions"], [
                 "id" => ($_SESSION["m-quiz"]["new"]["current question"] > 
                     count($_SESSION["m-quiz"]["old"]["questions"])) ? -1 :  
                     $_SESSION["m-quiz"]["old"]["questions"][$_SESSION["m-quiz"]["new"]["current question"]-1]["id"], // could be newly added
