@@ -308,11 +308,11 @@ function saveActiveQuiz() {
                 WHERE id = $id;
             ";
         } else {
-            $text = $question["text"];
-            $a = $question["a"];;
-            $b = $question["b"];
-            $c = $question["c"];
-            $d =$question["d"];
+            $text = "\"" . $question["text"] . "\"";
+            $a = "\"" . $question["a"] "\"";
+            $b = empty($question["b"]) ? "NULL" : "\"" . $question["b"] "\"";
+            $c = empty($question["c"]) ? "NULL" : "\"" . $question["c"] "\"";
+            $d = empty($question["d"]) ? "NULL" : "\"" . $question["d"] "\"";
             $answer = $question["answer"];
 
             if ($id == -1) {
