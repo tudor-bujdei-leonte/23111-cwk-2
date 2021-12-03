@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 if (mysqli_stmt_execute($stmt)) {
                     $Message = "Successfully created quiz!";
-                    header("location: login.php?Message=" . urlencode($Message));
+                    header("location: index.php?Message=" . urlencode($Message));
                     exit;
                 } else echo "Something went wrong. Please try again later.";
             } else echo "Something went wrong. Please try again later.";
