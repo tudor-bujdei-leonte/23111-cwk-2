@@ -310,12 +310,12 @@ function saveActiveQuiz() {
                 WHERE id = $qid;
             ";
         } else {
-            $text = "\"" . $question["text"] . "\"";
-            $a = "\"" . $question["a"] . "\"";
-            $b = empty($question["b"]) ? "NULL" : "\"" . $question["b"] . "\"";
-            $c = empty($question["c"]) ? "NULL" : "\"" . $question["c"] . "\"";
-            $d = empty($question["d"]) ? "NULL" : "\"" . $question["d"] . "\"";
-            $answer = "\"" . $question["answer"] . "\"";
+            $text = "'" . $question["text"] . "'";
+            $a = "'" . $question["a"] . "'";
+            $b = empty($question["b"]) ? "NULL" : "'" . $question["b"] . "'";
+            $c = empty($question["c"]) ? "NULL" : "'" . $question["c"] . "'";
+            $d = empty($question["d"]) ? "NULL" : "'" . $question["d"] . "'";
+            $answer = "'" . $question["answer"] . "'";
 
             if ($id == -1) {
                 $sql .= "INSERT INTO quiz_questions
@@ -341,17 +341,25 @@ function saveActiveQuiz() {
         }
     }
 
-    if ($stmt = mysqli_prepare($link, $sql)) {
-        if (mysqli_stmt_execute($stmt)) {
-            header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
-            exit;
-        } else echo "Error. Please try again later.";
+    if (mysqli_multi_query($link, $sql)) {
+        header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
+        exit;   
     } else echo "Error. Please try again later.";
+    echo mysqli_error($link);
     echo "<br>";
     echo $sql;
-    echo "<br>";
-    echo mysqli_error($link);
-    mysqli_stmt_close($stmt);
+
+    // if ($stmt = mysqli_prepare($link, $sql)) {
+    //     if (mysqli_multi_query($stmt)) {
+    //         header("location: index.php?Message=" . urlencode("Successfully modified quiz!"));
+    //         exit;
+    //     } else echo "Error. Please try again later.";
+    // } else echo "Error. Please try again later.";
+    // echo "<br>";
+    // echo $sql;
+    // echo "<br>";
+    // echo mysqli_error($link);
+    // mysqli_stmt_close($stmt);
 }
 
 // submit form
