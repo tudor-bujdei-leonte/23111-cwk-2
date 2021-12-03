@@ -309,11 +309,11 @@ function saveActiveQuiz() {
             ";
         } else {
             $text = $question["text"];
-            $a = $question[""];;
-            $b = $question[""];
-            $c = $question[""];
-            $d =$question[""];
-            $answer = $question[""];
+            $a = $question["a"];;
+            $b = $question["b"];
+            $c = $question["c"];
+            $d =$question["d"];
+            $answer = $question["answer"];
 
             if ($id == -1) {
                 $sql .= "INSERT INTO quiz_questions
