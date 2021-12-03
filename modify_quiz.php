@@ -283,8 +283,8 @@ function deleteActiveQuiz() {
 }
 
 function saveActiveQuiz() {
-    $id = $_SESSION["m-quiz"]["id"]
-    $title = $_SESSION["m-quiz"]["new"]["title"]
+    $id = $_SESSION["m-quiz"]["id"];
+    $title = $_SESSION["m-quiz"]["new"]["title"];
     $duration = $_SESSION["m-quiz"]["new"]["duration"];
     $available = $_SESSION["m-quiz"]["new"]["available"];
     $modifiable = $_SESSION["m-quiz"]["new"]["modifiable"];
