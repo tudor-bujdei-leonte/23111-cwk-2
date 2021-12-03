@@ -271,9 +271,9 @@ function deleteActiveQuiz() {
         if (mysqli_stmt_execute($stmt)) {
             // correct quiz_deletion log
             mysqli_stmt_close($stmt);
-            $sql = "UPDATE quiz_deletions SET uid = " . $_SESSION["uid"] . " WHERE quiz_d = " . $_SESSION["m-quiz"]["id"];
+            $sql = "UPDATE quiz_deletions SET uid = " . $_SESSION["uid"] . " WHERE quiz_id = " . $_SESSION["m-quiz"]["id"];
             $stmt = mysqli_prepare($link, $sql);
-            echo $stmt->error;
+            // echo $stmt->error;
             mysqli_stmt_execute($stmt);
 
             header("location: index.php?Message=" . urlencode("Successfully deleted quiz."));
