@@ -303,11 +303,11 @@ function saveActiveQuiz() {
         ";
     
     foreach ($questions as $question) {
-        $id = $question["id"];
+        $qid = $question["id"];
 
         if ($question["deleted"] && $id != -1) {
             $sql .= "DELETE FROM quiz_questions
-                WHERE id = $id;
+                WHERE id = $qid;
             ";
         } else {
             $text = "\"" . $question["text"] . "\"";
@@ -319,7 +319,8 @@ function saveActiveQuiz() {
 
             if ($id == -1) {
                 $sql .= "INSERT INTO quiz_questions
-                SET text = $text,
+                SET quiz_id = $qid
+                    text = $text,
                     a = $a,
                     b = $b,
                     c = $c,
