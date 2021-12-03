@@ -170,7 +170,7 @@ function setQuizDetails($qid) {
     require_once "config.php";
     $sql = "SELECT title, duration, available, modifiable FROM quizzes WHERE id = " . strval($qid);
     $_SESSION["t-quiz"] = [
-        "id" = $qid,
+        "id" => $qid,
         "title" => "",
         "duration" => 0,
         "visible" => 0,
