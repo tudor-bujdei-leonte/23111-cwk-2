@@ -129,7 +129,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     if (mysqli_stmt_execute($stmt)) {
                         // cool! keep it up!
-                    } else { 
+                    } else {
+                        echo "Quiz id: " . strval($quiz_id) . "\n;";
                         echo "Something went wrong. Please try again later. Code: 3";
                         $success = false;
                     }
