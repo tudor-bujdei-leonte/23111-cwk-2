@@ -250,7 +250,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     } elseif (isset($_POST["submitted"]) && $_POST["submitted"] == "return") {
         $_SESSION["t-quiz-state"] = -1;
-        header("location: index.php"));
+        header("location: index.php");
         exit;
     }
 
