@@ -389,11 +389,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 saveActiveQuiz();
             }
             // else, next question
-        } elseif ($_POST["submitted"] == "save") {
-            // submit form
-            $_SESSION["m-quiz-state"] = -1;
-            saveActiveQuiz();
-        } elseif ($_POST["submitted"] == "next" || $_POST["submitted"] == "new") {
+            $_SESSION["m-quiz"]["new"]["current question"]++;
+        } elseif ($_POST["submitted"] == "next" || $_POST["submitted"] == "new" || $_POST["submitted"] == "save") {
             if (empty($_POST["ans" . $_POST["anscorrect"]])) {
                 header("location: modify_quiz.php?Message=" . urlencode("The correct answer must be one of the possible answers."));
                 exit;
@@ -412,6 +409,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "answer" => $_POST["anscorrect"],
                 "deleted" => false
             ]);
+
+            // if save, return
+            if ($_POST["submitted"] == "save") {
+                $_SESSION["m-quiz-state"] = -1;
+                saveActiveQuiz();
+            }
 
             // then reset/increment m-quiz-state
             $_SESSION["m-quiz"]["new"]["current question"]++;
