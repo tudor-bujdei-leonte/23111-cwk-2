@@ -100,12 +100,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION["quiz"]["non-author modifiable"]
                 );
 
-                if (mysqli_stmt_execute($stmt)) {
-                    $Message = "Successfully created quiz!";
-                    header("location: index.php?Message=" . urlencode($Message));
-                    exit;
+                if ($quiz_id = mysqli_stmt_execute($stmt)) {
+                    // great! But I don't even know if the opposite returns 0, null, -1, nullptr, or something else.
                 } else echo "Something went wrong. Please try again later.";
             } else echo "Something went wrong. Please try again later.";
+            mysqli_stmt_close($stmt);
+
+            for ($_SESSION["quiz"]["questions"] as $question) {
+                $sql = "INSERT INTO quiz_questions SET quiz_id = ?, text = ?, a = ?, b = ?, c = ?, d = ?, answer = ?";
+                
+                if ($stmt = mysqli_prepare($link, $sql)) {
+                    mysqli_stmt_bind_param(
+                        $stmt, "issssss",
+                        $quiz_id,
+                        $question["text"],
+                        $question["a"],
+                        $question["b"],
+                        $question["c"],
+                        $question["d"],
+                        $question["answer"],
+                    );
+
+                    if (mysqli_stmt_execute($stmt)) {
+                        // cool! keep it up!
+                    } else echo "Something went wrong. Please try again later.";
+                } else echo "Something went wrong. Please try again later.";
+                mysqli_stmt_close($stmt);
+            }
+
+            header("location: index.php?Message=" . urlencode("Successfully created quiz!"));
+            exit;
         }
     }
 }
