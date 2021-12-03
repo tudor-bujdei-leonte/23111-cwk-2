@@ -88,6 +88,7 @@ function displayTakenQuizzes() {
     } else echo "An error occurred. Please try again later.";
     mysqli_stmt_close($stmt);
 
+    if (result == "") return "<p>You have not attempted any quiz.</p>";
     return $result;
 }
 
