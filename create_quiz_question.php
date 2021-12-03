@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 );
 
                 if (mysqli_stmt_execute($stmt)) {
-                    $res = mysqli_stmt_get_result($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
                     while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
                         foreach ($row as $r) {
                             print "$r ";
