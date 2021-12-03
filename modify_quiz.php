@@ -159,7 +159,7 @@ function getQuestionDetailsForm($question) {
 
     </div>
 </form>
-    '
+    ';
 }
 
 // fsm to figure out which part to execute
