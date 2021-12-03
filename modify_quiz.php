@@ -373,7 +373,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         modify_quiz_main();
 
         foreach ($_SESSION["m-quiz"]["new"]["questions"] as $question) {
-            echo "Question "
+            echo "Question " . $question["id"] . "<br>";
         }
         ?>
 
