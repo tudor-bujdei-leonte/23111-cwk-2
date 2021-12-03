@@ -161,7 +161,7 @@ function modify_quiz_main() {
             "id" => -1,
             "old" => [],
             "new" => []
-        ]
+        ];
     }
 
     if ($_SESSION["m-quiz-state"] == -1) {
